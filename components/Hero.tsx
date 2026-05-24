@@ -9,6 +9,8 @@ export function Hero({
   text,
   primary,
   secondary,
+  niche,
+  languageLine,
   labels
 }: {
   locale: Locale;
@@ -17,15 +19,21 @@ export function Hero({
   text: string;
   primary: string;
   secondary: string;
+  niche: string;
+  languageLine: string;
   labels: string[];
 }) {
   return (
-    <section className="mx-auto grid max-w-7xl items-center gap-16 px-4 pb-14 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[0.95fr_0.85fr] lg:px-8">
+    <section className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-12 pt-12 sm:px-6 md:pt-16 lg:grid-cols-[0.95fr_0.85fr] lg:px-8">
       <div>
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
-        <h1 className="max-w-3xl font-serif text-5xl leading-[1.02] text-petroleum md:text-7xl">{title}</h1>
-        <p className="mt-7 max-w-xl text-lg leading-8 text-ink/72">{text}</p>
-        <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+        <h1 className="max-w-3xl font-serif text-5xl leading-[1.03] text-petroleum md:text-6xl xl:text-[4.25rem]">{title}</h1>
+        <p className="mt-6 max-w-xl text-base leading-8 text-ink/72 md:text-lg">{text}</p>
+        <div className="mt-5 max-w-xl border-y border-ink/10 py-3">
+          <p className="font-serif text-lg leading-tight text-petroleum md:text-2xl">{niche}</p>
+          <p className="mt-2 text-xs font-semibold uppercase tracking-[0.22em] text-ink/52">{languageLine}</p>
+        </div>
+        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
           <LocaleLink
             locale={locale}
             page="contact"

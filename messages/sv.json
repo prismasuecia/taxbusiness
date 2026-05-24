@@ -23,22 +23,31 @@
     "readMore": "Läs mer"
   },
   "home": {
-    "heroEyebrow": "Redovisningsbyrå i Solna / Stockholm",
-    "heroTitle": "Redovisning med tydlighet, trygghet och personlig service.",
-    "heroText": "Taxbusiness Stockholm hjälper företagare att hålla ordning på bokföring, deklaration, bokslut, löner och företagsstart – på svenska, spanska och engelska.",
+    "heroEyebrow": "Redovisningsbyrå för spansktalande företagare i Stockholm",
+    "heroTitle": "Redovisning på spanska och svenska — med tydlighet, trygghet och personlig service.",
+    "heroText": "Taxbusiness Stockholm hjälper små och medelstora företag med bokföring, deklaration, bokslut, årsredovisning, löner och företagsstart. Vi förklarar det svenska systemet på ett språk du känner dig trygg med.",
+    "heroNiche": "Especialistas en contabilidad para hispanohablantes en Suecia",
+    "heroLanguages": "Svenska · Español · English",
     "visualLabels": ["Moms", "Bokslut", "Deklaration", "Löner", "Skatteverket"],
     "trust": [
-      "Svenska, spanska och engelska",
-      "Små och medelstora företag",
-      "Personlig och snabb återkoppling",
-      "Bokföring, deklaration och bokslut"
+      "För spansktalande företagare",
+      "Redovisning i Stockholm/Solna",
+      "Bokföring, deklaration och bokslut",
+      "Kontakt med Skatteverket",
+      "Org.nr 559252-6726"
     ],
+    "bridgeTitle": "En trygg bro mellan ditt företag och det svenska systemet",
+    "bridgeText": "Att driva företag i Sverige innebär regler, datum, deklarationer, moms och kontakt med myndigheter. För många spansktalande företagare är det avgörande att få detta förklarat på ett språk som känns naturligt. Taxbusiness hjälper dig att förstå vad som behöver göras, varför det behöver göras och när.",
+    "bridgeItems": ["Skatteverket", "Moms", "Deklaration", "Bokslut", "Fakturering", "Löner"],
     "introTitle": "Ekonomi ska kännas tydlig – inte krånglig.",
     "introText": "Vi hjälper dig att hålla ordning på företagets ekonomi och förklarar vad som behöver göras, när det behöver göras och varför. Målet är att du ska känna trygghet och kunna fokusera på din verksamhet.",
     "servicesTitle": "Tjänster som håller vardagen i ordning",
-    "servicesText": "Från företagsstart till löpande redovisning och deklarationer. Du får tydliga besked, relevanta underlag och en kontakt som svarar.",
-    "languageTitle": "Rådgivning på det språk du känner dig trygg med.",
-    "languageText": "För många företagare är ekonomin lättare att förstå när den förklaras på rätt språk. Därför erbjuder Taxbusiness stöd på svenska, spanska och engelska.",
+    "servicesText": "Samma redovisningstjänster, men med tydligare vägledning för företagare som vill förstå det svenska systemet på spanska och svenska.",
+    "languageTitle": "Ekonomisk hjälp på spanska — med svensk precision",
+    "languageText": "Taxbusiness arbetar dagligen med företagare som vill förstå svensk bokföring, skatt och administration på spanska. Vi hjälper även på svenska och engelska, men vår särskilda styrka är att göra det svenska företagssystemet begripligt för spansktalande kunder.",
+    "languagePrimary": "Español",
+    "languagePrimaryText": "Kärnkompetensen: redovisning och myndighetskontakt för spansktalande företagare i Sverige.",
+    "languageSecondary": ["Svenska", "English"],
     "processTitle": "Så blir samarbetet tydligt från start.",
     "processText": "Du får en lugn och strukturerad start där vi går igenom företagets behov, sätter upp rutiner och visar vad som behöver skickas in och när.",
     "process": [
@@ -63,16 +72,17 @@
     "qualityText": "Redovisning handlar lika mycket om ordning och kommunikation som om siffror. Därför arbetar Taxbusiness med tydliga avstämningar, enkla förklaringar och personlig kontakt.",
     "quality": [
       "Tydliga besked om vad som behöver göras",
-      "Kontakt på svenska, spanska eller engelska",
+      "Kontakt på spanska, svenska eller engelska",
       "Struktur kring moms, deklaration och viktiga datum",
+      "Personlig och snabb återkoppling",
       "Personlig återkoppling från Ana Maria Alvarez"
     ],
     "pricingTitle": "Inga överraskningar innan arbetet börjar.",
     "pricingText": "Priset beror på företagets omfattning, antal verifikationer, löner, momsperiod och vilka delar du vill ha hjälp med. Vi går igenom behoven först och föreslår ett upplägg som passar.",
     "fitTitle": "Passar för företagare som vill ha nära kontakt.",
     "fitText": "Taxbusiness passar särskilt bra för mindre och medelstora företag som vill förstå sin ekonomi, få snabb återkoppling och kunna ställa frågor på det språk som känns tryggast.",
-    "aboutTitle": "Personlig redovisning med erfarenhet och närvaro.",
-    "aboutText": "Ana Maria Alvarez hjälper företagare med redovisning, administration och kontakt med myndigheter. Med tydlig kommunikation och personlig service gör hon företagets ekonomi lättare att följa.",
+    "aboutTitle": "Specialist för spansktalande företagare i Sverige.",
+    "aboutText": "Ana Maria Alvarez hjälper företagare med redovisning, administration, fakturering och kontakt med myndigheter. Många kunder uppskattar särskilt att kunna få bokföring, deklarationer och frågor om Skatteverket förklarade på spanska, utan att förlora den struktur och noggrannhet som krävs i Sverige.",
     "ctaTitle": "Vill du få bättre ordning på företagets ekonomi?",
     "ctaText": "Skicka en förfrågan så återkommer vi och berättar hur vi kan hjälpa dig."
   },
@@ -80,29 +90,29 @@
     "items": [
       {
         "key": "company",
-        "title": "Företagsstart & administration",
-        "description": "Registrering, myndighetskontakt, fakturering, betalningar och den administration som gör vardagen enklare.",
+        "title": "Starta företag i Sverige",
+        "description": "Vägledning kring registrering, Skatteverket, administration, fakturering och de första rutinerna.",
         "details": "Vi hjälper dig att komma igång och hålla ordning på företagets administration.",
         "bullets": ["Registrering av företag", "Kontakt med Skatteverket", "Administration", "Hantering av betalningar", "Fakturering", "Fakturering av ROT och RUT", "Påminnelsehantering", "Fakturering åt dig vid behov"]
       },
       {
         "key": "accounting",
-        "title": "Bokföring & redovisning",
-        "description": "Löpande redovisning, avstämningar, moms, bokslut, årsredovisning och deklarationer.",
+        "title": "Löpande bokföring och moms",
+        "description": "Ordning på verifikationer, avstämningar, momsredovisning och den löpande ekonomin.",
         "details": "Vi tar hand om den löpande ekonomin och ser till att bokföringen är tydlig och lätt att följa.",
         "bullets": ["Löpande redovisning", "Matchning av verifikationer", "Avstämningar", "Momsredovisning", "Årsbokslut", "Årsredovisning", "Deklarationer"]
       },
       {
         "key": "payroll",
-        "title": "Löner & personal",
-        "description": "Trygg lönehantering och rätt underlag till arbetsgivardeklarationer.",
+        "title": "Löner, fakturering och myndighetskontakt",
+        "description": "Stöd med löner, fakturering, arbetsgivardeklarationer och praktisk administration.",
         "details": "Vi hjälper dig med löner och underlag som behövs för arbetsgivardeklarationer och personaladministration.",
         "bullets": ["Lönehantering", "Kontrolluppgifter", "Underlag till arbetsgivardeklaration"]
       },
       {
         "key": "taxes",
-        "title": "Skatt & myndighetskontakt",
-        "description": "Grundläggande skatteplanering, skattedeklarationer och kommunikation med myndigheter.",
+        "title": "Deklaration och bokslut",
+        "description": "Hjälp med deklarationer, skattefrågor och myndighetskontakt när företaget behöver avsluta eller rapportera rätt.",
         "details": "Vi hjälper dig med grundläggande skattefrågor och kontakt med myndigheter.",
         "bullets": ["Skatteplanering på grundläggande nivå", "Hantering av skattedeklarationer", "Kommunikation med myndigheter"]
       }

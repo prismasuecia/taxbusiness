@@ -27,7 +27,7 @@ export function Hero({
     <section className="mx-auto grid max-w-7xl items-center gap-14 px-4 pb-12 pt-12 sm:px-6 md:pt-16 lg:grid-cols-[0.95fr_0.85fr] lg:px-8">
       <div>
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
-        <h1 className="max-w-3xl font-serif text-5xl leading-[1.03] text-petroleum md:text-6xl xl:text-[4.25rem]">{title}</h1>
+        <h1 className="max-w-3xl font-serif text-4xl leading-[1.05] text-petroleum sm:text-5xl md:text-6xl xl:text-[4.25rem]">{title}</h1>
         <p className="mt-6 max-w-xl text-base leading-8 text-ink/72 md:text-lg">{text}</p>
         <div className="mt-5 max-w-xl border-y border-ink/10 py-3">
           <p className="font-serif text-lg leading-tight text-petroleum md:text-2xl">{niche}</p>
@@ -50,7 +50,9 @@ export function Hero({
           </LocaleLink>
         </div>
       </div>
-      <DecorativeGrid labels={labels} />
+      <div className="hidden lg:block">
+        <DecorativeGrid labels={labels} />
+      </div>
     </section>
   );
 }

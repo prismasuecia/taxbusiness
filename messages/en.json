@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "title": "Taxbusiness Stockholm | Accounting services in Sweden in Swedish and Spanish",
+    "description": "Taxbusiness Stockholm helps small and medium-sized businesses in Sweden with bookkeeping, tax returns, annual accounts, payroll and company registration in Swedish, Spanish and English."
+  },
+  "brand": {"name": "Taxbusiness", "place": "Stockholm"},
+  "nav": {"home": "Home", "services": "Services", "startCompany": "Start a company", "about": "About", "contact": "Contact", "privacy": "Privacy"},
+  "cta": {"contact": "Contact us", "services": "View services", "book": "Book a contact", "send": "Send request", "readMore": "Read more"},
+  "home": {
+    "heroEyebrow": "Accounting firm in Solna / Stockholm",
+    "heroTitle": "Clear, reliable and personal accounting services in Sweden.",
+    "heroText": "Taxbusiness Stockholm helps small and medium-sized businesses with bookkeeping, tax returns, annual accounts, payroll and company registration — in Swedish, Spanish and English.",
+    "visualLabels": ["VAT", "Annual accounts", "Tax returns", "Payroll", "Skatteverket"],
+    "trust": ["Support in Swedish, Spanish and English", "For small and medium-sized businesses", "Personal service and quick replies", "Bookkeeping, tax returns and annual reports"],
+    "introTitle": "Business finances should feel clear, not complicated.",
+    "introText": "We help you keep your company finances in order and explain what needs to be done, when it needs to be done and why. The goal is for you to feel secure and focus on your business.",
+    "servicesTitle": "Services that keep everyday business in order",
+    "servicesText": "From company registration to ongoing bookkeeping and tax returns. You get clear information, structured documentation and a responsive point of contact.",
+    "languageTitle": "Advice in the language you feel comfortable with.",
+    "languageText": "For many business owners, finances are easier to understand when they are explained in the right language. Taxbusiness offers support in Swedish, Spanish and English.",
+    "aboutTitle": "Personal accounting with experience and presence.",
+    "aboutText": "Ana Maria Alvarez helps business owners with accounting, administration and contact with authorities. With clear communication and personal service, she makes company finances easier to follow.",
+    "ctaTitle": "Would you like better order in your company finances?",
+    "ctaText": "Send a request and we will get back to you to explain how we can help."
+  },
+  "services": {
+    "items": [
+      {"key": "company", "title": "Company registration & administration", "description": "Registration, authority contact, invoicing, payments and practical administration.", "details": "We help you get started and keep your company administration organised.", "bullets": ["Company registration", "Contact with Skatteverket", "Administration", "Payment handling", "Invoicing", "ROT and RUT invoicing", "Payment reminders", "Invoicing on your behalf when needed"]},
+      {"key": "accounting", "title": "Bookkeeping & accounting", "description": "Ongoing bookkeeping, reconciliations, VAT, annual accounts, annual reports and tax returns.", "details": "We handle the ongoing finances and make your bookkeeping clear and easy to follow.", "bullets": ["Ongoing bookkeeping", "Matching receipts and documents", "Reconciliations", "VAT reporting", "Annual accounts", "Annual report", "Tax returns"]},
+      {"key": "payroll", "title": "Payroll & staff", "description": "Payroll handling and documents for employer declarations and staff administration.", "details": "We help with payroll and the documentation needed for employer reporting and staff administration.", "bullets": ["Payroll handling", "Control information", "Documents for employer declarations"]},
+      {"key": "taxes", "title": "Taxes & authority contact", "description": "Basic tax planning, tax declarations and communication with Swedish authorities.", "details": "We help with basic tax matters and communication with authorities.", "bullets": ["Basic tax planning", "Handling tax declarations", "Communication with authorities"]}
+    ],
+    "pageTitle": "Services for business owners who want clear finances",
+    "pageText": "We help small and medium-sized businesses with accounting, administration, payroll, tax returns and authority contact. You can get help in Swedish, Spanish or English."
+  },
+  "startCompany": {
+    "title": "Start a company in Sweden with clear guidance",
+    "text": "Starting a company involves several practical steps. We help with registration, contact with Skatteverket and the administration needed to get started correctly.",
+    "items": ["Choose company form", "Registration", "F-tax and VAT", "Invoicing", "Ongoing bookkeeping", "Important dates", "Contact with authorities"],
+    "cta": "Want to start a company? Contact us and we will go through what you need to do."
+  },
+  "about": {
+    "title": "About Taxbusiness Stockholm",
+    "text": ["Taxbusiness Stockholm is an accounting firm in Solna helping small and medium-sized businesses with accounting, bookkeeping, tax returns and administration.", "We place great importance on personal service, clear information and quick replies. Many business owners value getting help in their own language. That is why we offer services in Swedish, Spanish and English.", "Our aim is that no company should feel too small to receive professional support."],
+    "person": "Ana Maria Alvarez",
+    "role": "Accounting economist",
+    "area": "Company registration and administration"
+  },
+  "contact": {"title": "Contact Taxbusiness Stockholm", "text": "Do you have questions about bookkeeping, tax returns, company registration or payroll? Send a request and we will get back to you.", "location": "Solna / Stockholm, Sweden", "languages": "Swedish, Spanish and English"},
+  "form": {
+    "name": "Name", "email": "Email", "phone": "Phone", "company": "Company name", "preferredLanguage": "Language I want to be contacted in", "helpWith": "What do you need help with?", "message": "Message", "consent": "I agree that Taxbusiness Stockholm may contact me regarding my request.", "privacy": "We use your information only to respond to your request.", "success": "Thank you! We have received your request and will get back to you as soon as possible.", "error": "Something went wrong. Please try again or contact us by email.", "rateLimit": "You have sent several requests in a short time. Please wait a moment and try again.", "required": "Required field", "options": ["Bookkeeping", "Tax return", "Start a company", "Payroll", "VAT", "Annual report", "Other"]
+  },
+  "privacy": {"title": "Privacy", "text": ["We use the contact details you submit through the form only to respond to your request.", "The information is not sold to third parties and is not used for marketing without your consent.", "You can contact us if you want to know what information is stored or request that it is deleted."]},
+  "footer": {"summary": "A personal accounting firm in Solna for business owners who want clear finances in Swedish, Spanish or English.", "org": "Org.nr 559252-6726", "contact": "info@taxbusiness.se"}
+}

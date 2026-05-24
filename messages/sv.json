@@ -25,13 +25,13 @@
   "home": {
     "heroEyebrow": "Redovisningsbyrå i Solna / Stockholm",
     "heroTitle": "Redovisning med tydlighet, trygghet och personlig service.",
-    "heroText": "Taxbusiness Stockholm hjälper små och medelstora företag med bokföring, deklaration, bokslut, årsredovisning, löner och företagsregistrering – på svenska, spanska och engelska.",
+    "heroText": "Taxbusiness Stockholm hjälper företagare att hålla ordning på bokföring, deklaration, bokslut, löner och företagsstart – på svenska, spanska och engelska.",
     "visualLabels": ["Moms", "Bokslut", "Deklaration", "Löner", "Skatteverket"],
     "trust": [
-      "Hjälp på svenska, spanska och engelska",
-      "För små och medelstora företag",
-      "Personlig service och snabb återkoppling",
-      "Bokföring, deklaration och årsredovisning"
+      "Svenska, spanska och engelska",
+      "Små och medelstora företag",
+      "Personlig och snabb återkoppling",
+      "Bokföring, deklaration och bokslut"
     ],
     "introTitle": "Ekonomi ska kännas tydlig – inte krånglig.",
     "introText": "Vi hjälper dig att hålla ordning på företagets ekonomi och förklarar vad som behöver göras, när det behöver göras och varför. Målet är att du ska känna trygghet och kunna fokusera på din verksamhet.",

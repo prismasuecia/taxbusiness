@@ -20,11 +20,11 @@ export function Hero({
   labels: string[];
 }) {
   return (
-    <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[1.02fr_0.98fr] lg:px-8">
+    <section className="mx-auto grid max-w-7xl items-center gap-16 px-4 pb-14 pt-14 sm:px-6 md:pt-20 lg:grid-cols-[0.95fr_0.85fr] lg:px-8">
       <div>
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-copper">{eyebrow}</p>
-        <h1 className="max-w-4xl font-serif text-5xl leading-[1.04] text-petroleum md:text-7xl">{title}</h1>
-        <p className="mt-7 max-w-2xl text-lg leading-8 text-ink/72 md:text-xl md:leading-9">{text}</p>
+        <h1 className="max-w-3xl font-serif text-5xl leading-[1.02] text-petroleum md:text-7xl">{title}</h1>
+        <p className="mt-7 max-w-xl text-lg leading-8 text-ink/72">{text}</p>
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
           <LocaleLink
             locale={locale}

@@ -12,6 +12,7 @@ const nextConfig = {
   output: isGithubPages ? 'export' : undefined,
   basePath,
   assetPrefix: basePath || undefined,
+  trailingSlash: isGithubPages,
   outputFileTracingRoot: __dirname,
   images: {
     unoptimized: isGithubPages,

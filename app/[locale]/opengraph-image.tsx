@@ -1,9 +1,14 @@
 import {ImageResponse} from 'next/og';
 import {getDictionary} from '@/lib/dictionaries';
-import {isLocale} from '@/lib/navigation';
+import {isLocale, locales} from '@/lib/navigation';
 
 export const size = {width: 1200, height: 630};
 export const contentType = 'image/png';
+export const dynamic = 'force-static';
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({locale}));
+}
 
 export default async function Image({params}: {params: Promise<{locale: string}>}) {
   const {locale} = await params;

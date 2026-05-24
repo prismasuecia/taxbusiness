@@ -1,10 +1,7 @@
 'use client';
 
-import {useActionState} from 'react';
-import {submitContactForm, type ContactFormState} from '@/lib/contact';
+import {FormEvent, useState} from 'react';
 import type {Locale} from '@/lib/navigation';
-
-const initialState: ContactFormState = {status: 'idle'};
 
 export function ContactForm({
   locale,
@@ -30,19 +27,63 @@ export function ContactForm({
   };
   options: string[];
 }) {
-  const [state, action, pending] = useActionState(submitContactForm, initialState);
-  const fieldError = (name: string) => state.fieldErrors?.[name]?.[0];
-  const alertMessage =
-    state.status === 'success'
-      ? labels.success
-      : state.message === 'rateLimit'
-        ? labels.rateLimit
-        : state.status === 'error'
-          ? labels.error
-          : null;
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [pending, setPending] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
+  const alertMessage = status === 'success' ? labels.success : status === 'error' ? labels.error : null;
+
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const message = String(formData.get('message') || '').trim();
+    const helpWith = formData.getAll('helpWith').map(String);
+    const consent = formData.get('consent') === 'on';
+
+    const nextErrors = {
+      name: name.length < 2,
+      email: !email.includes('@'),
+      message: message.length < 10,
+      helpWith: helpWith.length === 0,
+      consent: !consent
+    };
+    setFieldErrors(nextErrors);
+
+    if (Object.values(nextErrors).some(Boolean)) {
+      setStatus('error');
+      return;
+    }
+
+    setPending(true);
+    const phone = String(formData.get('phone') || '').trim();
+    const company = String(formData.get('company') || '').trim();
+    const preferredLanguage = String(formData.get('preferredLanguage') || locale);
+    const subject = 'Ny förfrågan från Taxbusiness.se';
+    const body = [
+      'Ny kontaktförfrågan',
+      '',
+      `Namn: ${name}`,
+      `E-post: ${email}`,
+      `Telefon: ${phone || '-'}`,
+      `Företagsnamn: ${company || '-'}`,
+      `Önskat språk: ${preferredLanguage}`,
+      `Behöver hjälp med: ${helpWith.join(', ')}`,
+      'Meddelande:',
+      message,
+      '',
+      'Skickat från:',
+      'taxbusiness.se'
+    ].join('\n');
+
+    window.location.href = `mailto:info@taxbusiness.se?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setStatus('success');
+    setPending(false);
+  }
 
   return (
-    <form action={action} className="rounded-[2rem] border border-ink/10 bg-white p-5 shadow-soft md:p-8" noValidate>
+    <form onSubmit={handleSubmit} className="rounded-[2rem] border border-ink/10 bg-white p-5 shadow-soft md:p-8" noValidate>
       <div className="hidden" aria-hidden="true">
         <label htmlFor="website">Website</label>
         <input id="website" name="website" tabIndex={-1} autoComplete="off" />
@@ -51,7 +92,7 @@ export function ContactForm({
       {alertMessage ? (
         <div
           className={`mb-6 rounded-2xl px-4 py-3 text-sm ${
-            state.status === 'success' ? 'bg-petroleum text-white' : 'bg-linen text-ink'
+                status === 'success' ? 'bg-petroleum text-white' : 'bg-linen text-ink'
           }`}
           role="status"
         >
@@ -60,8 +101,8 @@ export function ContactForm({
       ) : null}
 
       <div className="grid gap-5 md:grid-cols-2">
-        <Field name="name" label={labels.name} error={fieldError('name') ? labels.required : undefined} required />
-        <Field name="email" type="email" label={labels.email} error={fieldError('email') ? labels.required : undefined} required />
+        <Field name="name" label={labels.name} error={fieldErrors.name ? labels.required : undefined} required />
+        <Field name="email" type="email" label={labels.email} error={fieldErrors.email ? labels.required : undefined} required />
         <Field name="phone" label={labels.phone} />
         <Field name="company" label={labels.company} />
       </div>
@@ -92,7 +133,7 @@ export function ContactForm({
             </label>
           ))}
         </div>
-        {fieldError('helpWith') ? <p className="mt-2 text-sm text-red-900">{labels.required}</p> : null}
+        {fieldErrors.helpWith ? <p className="mt-2 text-sm text-red-900">{labels.required}</p> : null}
       </fieldset>
 
       <div className="mt-6">
@@ -104,11 +145,11 @@ export function ContactForm({
           name="message"
           rows={5}
           required
-          aria-invalid={Boolean(fieldError('message'))}
-          aria-describedby={fieldError('message') ? 'message-error' : undefined}
+          aria-invalid={Boolean(fieldErrors.message)}
+          aria-describedby={fieldErrors.message ? 'message-error' : undefined}
           className="w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
         />
-        {fieldError('message') ? (
+        {fieldErrors.message ? (
           <p className="mt-2 text-sm text-red-900" id="message-error">
             {labels.required}
           </p>
@@ -119,7 +160,7 @@ export function ContactForm({
         <input className="mt-1 h-4 w-4 accent-petroleum" type="checkbox" name="consent" required />
         <span>{labels.consent}</span>
       </label>
-      {fieldError('consent') ? <p className="mt-2 text-sm text-red-900">{labels.required}</p> : null}
+      {fieldErrors.consent ? <p className="mt-2 text-sm text-red-900">{labels.required}</p> : null}
       <p className="mt-3 text-sm text-ink/52">{labels.privacy}</p>
 
       <button

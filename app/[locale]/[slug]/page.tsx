@@ -72,6 +72,7 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
               {dict.footer.contact}
             </a>
             <p className="mt-5 text-sm text-ink/55">{dict.contact.languages}</p>
+            <p className="mt-4 border-t border-ink/10 pt-4 text-sm leading-6 text-ink/62">{dict.contact.response}</p>
           </div>
         </div>
         <ContactForm locale={locale} labels={formLabels} options={dict.form.options} />
@@ -122,6 +123,18 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
           ))}
         </div>
       </section>
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
+        <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
+        <ol className="grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2">
+          {dict.home.process.map((step, index) => (
+            <li key={step.title} className="bg-white p-6">
+              <span className="text-sm font-semibold text-copper">0{index + 1}</span>
+              <h2 className="mt-5 font-serif text-3xl text-petroleum">{step.title}</h2>
+              <p className="mt-3 leading-7 text-ink/68">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <CTA locale={locale} title={dict.home.ctaTitle} text={dict.home.ctaText} label={dict.cta.contact} />
       </section>
@@ -150,6 +163,16 @@ function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<type
       <div className="mt-16">
         <CTA locale={locale} title={dict.startCompany.cta} text={dict.home.languageText} label={dict.cta.contact} />
       </div>
+      <section className="mt-16 grid gap-5 lg:grid-cols-2">
+        <article className="rounded-[2rem] border border-ink/10 bg-white p-7">
+          <h2 className="font-serif text-3xl text-petroleum">{dict.home.processTitle}</h2>
+          <p className="mt-4 leading-7 text-ink/68">{dict.home.processText}</p>
+        </article>
+        <article className="rounded-[2rem] border border-ink/10 bg-white p-7">
+          <h2 className="font-serif text-3xl text-petroleum">{dict.home.pricingTitle}</h2>
+          <p className="mt-4 leading-7 text-ink/68">{dict.home.pricingText}</p>
+        </article>
+      </section>
     </main>
   );
 }

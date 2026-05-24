@@ -39,6 +39,38 @@
     "servicesText": "Från företagsstart till löpande redovisning och deklarationer. Du får tydliga besked, relevanta underlag och en kontakt som svarar.",
     "languageTitle": "Rådgivning på det språk du känner dig trygg med.",
     "languageText": "För många företagare är ekonomin lättare att förstå när den förklaras på rätt språk. Därför erbjuder Taxbusiness stöd på svenska, spanska och engelska.",
+    "processTitle": "Så blir samarbetet tydligt från start.",
+    "processText": "Du får en lugn och strukturerad start där vi går igenom företagets behov, sätter upp rutiner och visar vad som behöver skickas in och när.",
+    "process": [
+      {
+        "title": "Första kontakt",
+        "text": "Du berättar kort om företaget och vad du behöver hjälp med."
+      },
+      {
+        "title": "Genomgång",
+        "text": "Vi tittar på omfattning, viktiga datum, momsperioder och befintliga rutiner."
+      },
+      {
+        "title": "Tydliga rutiner",
+        "text": "Du får veta vilka underlag som behövs och hur kommunikationen fungerar."
+      },
+      {
+        "title": "Löpande återkoppling",
+        "text": "Vi följer upp frågor i tid så att ekonomin inte blir något som skjuts upp."
+      }
+    ],
+    "qualityTitle": "Trygghet i detaljerna.",
+    "qualityText": "Redovisning handlar lika mycket om ordning och kommunikation som om siffror. Därför arbetar Taxbusiness med tydliga avstämningar, enkla förklaringar och personlig kontakt.",
+    "quality": [
+      "Tydliga besked om vad som behöver göras",
+      "Kontakt på svenska, spanska eller engelska",
+      "Struktur kring moms, deklaration och viktiga datum",
+      "Personlig återkoppling från Ana Maria Alvarez"
+    ],
+    "pricingTitle": "Inga överraskningar innan arbetet börjar.",
+    "pricingText": "Priset beror på företagets omfattning, antal verifikationer, löner, momsperiod och vilka delar du vill ha hjälp med. Vi går igenom behoven först och föreslår ett upplägg som passar.",
+    "fitTitle": "Passar för företagare som vill ha nära kontakt.",
+    "fitText": "Taxbusiness passar särskilt bra för mindre och medelstora företag som vill förstå sin ekonomi, få snabb återkoppling och kunna ställa frågor på det språk som känns tryggast.",
     "aboutTitle": "Personlig redovisning med erfarenhet och närvaro.",
     "aboutText": "Ana Maria Alvarez hjälper företagare med redovisning, administration och kontakt med myndigheter. Med tydlig kommunikation och personlig service gör hon företagets ekonomi lättare att följa.",
     "ctaTitle": "Vill du få bättre ordning på företagets ekonomi?",
@@ -95,7 +127,8 @@
     "title": "Kontakta Taxbusiness Stockholm",
     "text": "Har du frågor om bokföring, deklaration, företagsstart eller löner? Skicka en förfrågan så återkommer vi.",
     "location": "Solna / Stockholm, Sverige",
-    "languages": "Svenska, spanska och engelska"
+    "languages": "Svenska, spanska och engelska",
+    "response": "Vi återkommer så snart vi kan och berättar vilket upplägg som passar din situation."
   },
   "form": {
     "name": "Namn",
@@ -116,6 +149,27 @@
   "privacy": {
     "title": "Integritet",
     "text": ["Vi använder kontaktuppgifter som du skickar via formuläret endast för att kunna svara på din förfrågan.", "Uppgifterna säljs inte vidare och används inte för marknadsföring utan ditt samtycke.", "Du kan kontakta oss om du vill veta vilka uppgifter som finns sparade eller om du vill att de tas bort."]
+  },
+  "faq": {
+    "title": "Vanliga frågor",
+    "items": [
+      {
+        "question": "Kan jag få hjälp på spanska?",
+        "answer": "Ja. Taxbusiness erbjuder hjälp på svenska, spanska och engelska, så att du kan förstå ekonomi och myndighetskontakt på ett språk som känns tryggt."
+      },
+      {
+        "question": "Måste mitt företag vara stort för att få hjälp?",
+        "answer": "Nej. Målet är att även mindre företag ska kunna få professionellt stöd med tydliga rutiner och personlig kontakt."
+      },
+      {
+        "question": "Hur vet jag vad det kommer att kosta?",
+        "answer": "Vi går först igenom företagets omfattning och behov. Därefter kan vi föreslå ett upplägg innan arbetet startar."
+      },
+      {
+        "question": "Kan ni hjälpa mig med kontakten med Skatteverket?",
+        "answer": "Ja. Kontakt med Skatteverket och annan myndighetskommunikation ingår i de områden Taxbusiness hjälper företagare med."
+      }
+    ]
   },
   "footer": {
     "summary": "En personlig redovisningsbyrå i Solna för företagare som vill ha tydlig ekonomi på svenska, spanska eller engelska.",

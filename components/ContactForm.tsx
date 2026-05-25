@@ -84,11 +84,6 @@ export function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} className="rounded-[2rem] border border-ink/10 bg-white p-5 shadow-soft md:p-8" noValidate>
-      <div className="hidden" aria-hidden="true">
-        <label htmlFor="website">Website</label>
-        <input id="website" name="website" tabIndex={-1} autoComplete="off" />
-      </div>
-
       {alertMessage ? (
         <div
           className={`mb-6 rounded-2xl px-4 py-3 text-sm ${

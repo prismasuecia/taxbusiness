@@ -129,10 +129,19 @@
     "pageText": "Tax Business Stockholm AB hjälper små och medelstora företag med bokföring, moms, deklarationer, bokslut, årsredovisning, löner och administration. Du kan få hjälp på svenska, spanska eller engelska."
   },
   "startCompany": {
-    "title": "Starta företag i Sverige med rätt rutiner från början",
-    "text": "Att starta företag innebär val av företagsform, registrering, F-skatt, moms och löpande bokföring. Vi hjälper dig att förstå vad som behöver göras och i vilken ordning.",
+    "title": "Starta företag i Sverige med hjälp på svenska och spanska",
+    "text": "Att starta företag innebär flera praktiska steg: företagsform, registrering, F-skatt, moms, fakturering och bokföring. Tax Business Stockholm AB hjälper dig att komma igång med rätt rutiner från början och förklarar vad som behöver göras.",
     "items": ["Välj företagsform", "Registrering", "F-skatt och moms", "Fakturering", "Löpande bokföring", "Viktiga datum", "Kontakt med Skatteverket"],
-    "cta": "Vill du starta företag? Kontakta oss så går vi igenom vad du behöver göra."
+    "sections": [
+      {"title": "Välj företagsform", "text": "Vi går igenom om enskild firma eller aktiebolag passar bäst utifrån verksamheten och hur du vill arbeta."},
+      {"title": "Registrering, F-skatt och moms", "text": "Vi hjälper dig förstå vad som behöver registreras och vilka uppgifter Skatteverket behöver."},
+      {"title": "Fakturering och första underlag", "text": "Du får hjälp att komma igång med fakturor, kvitton och rutiner för det som ska sparas."},
+      {"title": "Löpande bokföring", "text": "Vi visar vilka underlag som behövs varje månad eller kvartal."},
+      {"title": "Viktiga datum", "text": "Du får veta vilka datum som gäller för moms, deklarationer och andra uppgifter."},
+      {"title": "Kontakt med myndigheter", "text": "Vi hjälper dig förstå brev, frågor och kompletteringar från Skatteverket."}
+    ],
+    "cta": "Vill du starta företag?",
+    "ctaText": "Skicka en förfrågan så går vi igenom vad du behöver göra. Du förbinder dig inte till något genom att kontakta oss."
   },
   "about": {
     "title": "En personlig redovisningsbyrå i Solna",

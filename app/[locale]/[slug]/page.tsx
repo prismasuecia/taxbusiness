@@ -149,36 +149,26 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
 }
 
 function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof getDictionary>}) {
+  const sections =
+    'sections' in dict.startCompany
+      ? dict.startCompany.sections
+      : dict.startCompany.items.map((item) => ({title: item, text: ''}));
+  const ctaText = 'ctaText' in dict.startCompany ? dict.startCompany.ctaText : dict.home.languageText;
+
   return (
     <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-        <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} />
-        <div className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft">
-          <ol className="grid gap-3">
-            {dict.startCompany.items.map((item, index) => (
-              <li key={item} className="flex items-center gap-4 rounded-2xl bg-paper px-4 py-4">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-petroleum text-sm font-semibold text-white">
-                  {index + 1}
-                </span>
-                <span className="font-medium text-ink/75">{item}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
+      <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} />
+      <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+        {sections.map((item) => (
+          <article key={item.title} className="bg-white p-6">
+            <h2 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
+            {item.text ? <p className="mt-3 leading-7 text-ink/68">{item.text}</p> : null}
+          </article>
+        ))}
       </div>
       <div className="mt-16">
-        <CTA locale={locale} title={dict.startCompany.cta} text={dict.home.languageText} label={dict.cta.contact} />
+        <CTA locale={locale} title={dict.startCompany.cta} text={ctaText} label={dict.cta.contact} />
       </div>
-      <section className="mt-16 grid gap-5 lg:grid-cols-2">
-        <article className="rounded-[2rem] border border-ink/10 bg-white p-7">
-          <h2 className="font-serif text-3xl text-petroleum">{dict.home.processTitle}</h2>
-          <p className="mt-4 leading-7 text-ink/68">{dict.home.processText}</p>
-        </article>
-        <article className="rounded-[2rem] border border-ink/10 bg-white p-7">
-          <h2 className="font-serif text-3xl text-petroleum">{dict.home.pricingTitle}</h2>
-          <p className="mt-4 leading-7 text-ink/68">{dict.home.pricingText}</p>
-        </article>
-      </section>
     </main>
   );
 }

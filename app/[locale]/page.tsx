@@ -5,7 +5,7 @@ import {SectionIntro} from '@/components/SectionIntro';
 import {TrustBar} from '@/components/TrustBar';
 import {getDictionary} from '@/lib/dictionaries';
 import {isLocale, type Locale} from '@/lib/navigation';
-import {ArrowUpRight, CheckCircle2, Languages, UserRound} from 'lucide-react';
+import {ArrowUpRight, CheckCircle2} from 'lucide-react';
 import {notFound} from 'next/navigation';
 
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
@@ -25,10 +25,6 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         secondary={dict.cta.services}
         niche={dict.home.heroNiche}
         languageLine={dict.home.heroLanguages}
-        visualEyebrow={dict.home.visualEyebrow}
-        visualTitle={dict.home.visualTitle}
-        visualText={dict.home.visualText}
-        labels={dict.home.visualLabels}
       />
       <div className="px-4 sm:px-6 lg:px-8">
         <TrustBar items={dict.home.trust} />
@@ -66,10 +62,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         </div>
       </section>
       <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.2fr_1fr] lg:px-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-linen text-petroleum">
-            <Languages className="h-6 w-6" aria-hidden="true" />
-          </div>
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <SectionIntro title={dict.home.languageTitle} text={dict.home.languageText} />
         </div>
       </section>
@@ -85,10 +78,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">
-        <div className="grid gap-8 rounded-[1.5rem] border border-ink/10 bg-white p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:p-8">
-          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-linen text-petroleum">
-            <UserRound className="h-6 w-6" aria-hidden="true" />
-          </div>
+        <div className="grid gap-8 rounded-[1.5rem] border border-ink/10 bg-white p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
           <div>
             <h2 className="font-serif text-3xl leading-tight text-petroleum md:text-4xl">{dict.home.aboutTitle}</h2>
             <p className="mt-3 max-w-3xl leading-7 text-ink/68">{dict.home.aboutText}</p>

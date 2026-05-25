@@ -1,6 +1,7 @@
 'use client';
 
 import {Menu, X} from 'lucide-react';
+import Image from 'next/image';
 import {usePathname} from 'next/navigation';
 import {useState} from 'react';
 import {pageFromSlug, type Locale, type PageKey} from '@/lib/navigation';
@@ -8,6 +9,7 @@ import {LocaleLink} from './LocaleLink';
 import {LanguageSwitcher} from './LanguageSwitcher';
 
 type NavItem = {page: PageKey; label: string};
+const logoMark = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/brand/tax-business-mark.jpg`;
 
 export function Header({
   locale,
@@ -29,8 +31,15 @@ export function Header({
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-paper/88 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <LocaleLink locale={locale} page="home" className="group flex items-center gap-3">
-          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-petroleum/20 bg-white font-serif text-lg text-petroleum">
-            TB
+          <span className="flex h-12 w-14 overflow-hidden rounded-xl border border-petroleum/15 bg-white p-1">
+            <Image
+              src={logoMark}
+              alt=""
+              width={80}
+              height={80}
+              className="h-full w-full object-contain object-center"
+              priority
+            />
           </span>
           <span className="leading-none">
             <span className="block font-serif text-xl text-petroleum">Tax Business</span>
@@ -95,14 +104,14 @@ export function Header({
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink/50">Språk / Idioma / Language</p>
             <div className="flex items-center justify-between gap-3">
               <LanguageSwitcher locale={locale} page={currentPage} />
-            <LocaleLink
-              locale={locale}
-              page="contact"
-              onClick={() => setOpen(false)}
-              className="rounded-full bg-petroleum px-5 py-2.5 text-sm font-semibold text-white"
-            >
-              {contactLabel}
-            </LocaleLink>
+              <LocaleLink
+                locale={locale}
+                page="contact"
+                onClick={() => setOpen(false)}
+                className="rounded-full bg-petroleum px-5 py-2.5 text-sm font-semibold text-white"
+              >
+                {contactLabel}
+              </LocaleLink>
             </div>
           </div>
         </div>

@@ -1,10 +1,13 @@
 'use client';
 
+import Image from 'next/image';
 import {usePathname} from 'next/navigation';
 import type {Locale, PageKey} from '@/lib/navigation';
 import {pageFromSlug} from '@/lib/navigation';
 import {LanguageSwitcher} from './LanguageSwitcher';
 import {LocaleLink} from './LocaleLink';
+
+const footerLogo = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/brand/tax-business-logo-cropped.jpg`;
 
 export function Footer({
   locale,
@@ -37,8 +40,14 @@ export function Footer({
     <footer className="border-t border-ink/10 bg-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
         <div>
-          <LocaleLink locale={locale} page="home" className="font-serif text-3xl text-petroleum">
-            Tax Business Stockholm AB
+          <LocaleLink locale={locale} page="home" className="inline-flex rounded-xl bg-white">
+            <Image
+              src={footerLogo}
+              alt="Tax Business Stockholm AB"
+              width={260}
+              height={216}
+              className="h-auto w-44 object-contain"
+            />
           </LocaleLink>
           <p className="mt-4 max-w-md leading-7 text-ink/68">{summary}</p>
           <p className="mt-5 text-sm text-ink/55">{org}</p>

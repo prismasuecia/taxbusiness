@@ -158,14 +158,14 @@ function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<type
   return (
     <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} />
-      <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+      <ol className="mt-12 list-decimal space-y-4 pl-6">
         {sections.map((item) => (
-          <article key={item.title} className="bg-white p-6">
-            <h2 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
+          <li key={item.title} className="pl-2 text-petroleum">
+            <h2 className="inline font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
             {item.text ? <p className="mt-3 leading-7 text-ink/68">{item.text}</p> : null}
-          </article>
+          </li>
         ))}
-      </div>
+      </ol>
       <div className="mt-16">
         <CTA locale={locale} title={dict.startCompany.cta} text={ctaText} label={dict.cta.contact} />
       </div>

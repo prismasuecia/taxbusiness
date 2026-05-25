@@ -134,11 +134,12 @@
     "items": ["Välj företagsform", "Registrering", "F-skatt och moms", "Fakturering", "Löpande bokföring", "Viktiga datum", "Kontakt med Skatteverket"],
     "sections": [
       {"title": "Välj företagsform", "text": "Vi går igenom om enskild firma eller aktiebolag passar bäst utifrån verksamheten och hur du vill arbeta."},
-      {"title": "Registrering, F-skatt och moms", "text": "Vi hjälper dig förstå vad som behöver registreras och vilka uppgifter Skatteverket behöver."},
-      {"title": "Fakturering och första underlag", "text": "Du får hjälp att komma igång med fakturor, kvitton och rutiner för det som ska sparas."},
+      {"title": "Registrering", "text": "Vi hjälper dig förstå vad som behöver registreras och vilka uppgifter som behövs."},
+      {"title": "F-skatt och moms", "text": "Du får hjälp att komma igång med F-skatt, moms och de första rutinerna."},
+      {"title": "Fakturering", "text": "Du får hjälp att komma igång med fakturor, kvitton och rutiner för det som ska sparas."},
       {"title": "Löpande bokföring", "text": "Vi visar vilka underlag som behövs varje månad eller kvartal."},
       {"title": "Viktiga datum", "text": "Du får veta vilka datum som gäller för moms, deklarationer och andra uppgifter."},
-      {"title": "Kontakt med myndigheter", "text": "Vi hjälper dig förstå brev, frågor och kompletteringar från Skatteverket."}
+      {"title": "Kontakt med Skatteverket", "text": "Vi hjälper dig förstå brev, frågor och kompletteringar från Skatteverket."}
     ],
     "cta": "Vill du starta företag?",
     "ctaText": "Skicka en förfrågan så går vi igenom vad du behöver göra. Du förbinder dig inte till något genom att kontakta oss."

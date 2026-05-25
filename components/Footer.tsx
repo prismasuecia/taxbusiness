@@ -1,4 +1,8 @@
+'use client';
+
+import {usePathname} from 'next/navigation';
 import type {Locale, PageKey} from '@/lib/navigation';
+import {pageFromSlug} from '@/lib/navigation';
 import {LanguageSwitcher} from './LanguageSwitcher';
 import {LocaleLink} from './LocaleLink';
 
@@ -25,6 +29,10 @@ export function Footer({
   org: string;
   email: string;
 }) {
+  const pathname = usePathname();
+  const slug = pathname.split('/').filter(Boolean)[1];
+  const currentPage = pageFromSlug(locale, slug) ?? page;
+
   return (
     <footer className="border-t border-ink/10 bg-white">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr] lg:px-8">
@@ -56,7 +64,7 @@ export function Footer({
           </a>
           <div className="mt-5">
             <h2 className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-petroleum">{languageHeading}</h2>
-            <LanguageSwitcher locale={locale} page={page} />
+            <LanguageSwitcher locale={locale} page={currentPage} />
           </div>
         </div>
       </div>

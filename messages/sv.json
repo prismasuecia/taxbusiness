@@ -75,6 +75,8 @@
     "fitText": "Tax Business passar företagare som vill kunna ställa frågor, förstå vad som händer och få ordning på rutinerna runt bokföring, moms och deklaration.",
     "aboutTitle": "En personlig redovisningsbyrå i Solna",
     "aboutText": "Ana Maria Alvarez driver Tax Business Stockholm AB och arbetar nära kunderna i den löpande ekonomin. Hon hjälper företagare att få ordning på underlag, rutiner, viktiga datum och kontakt med myndigheter.",
+    "personTitle": "Personlig kontakt med Ana Maria Alvarez",
+    "personText": "Bakom Tax Business Stockholm AB finns Ana Maria Alvarez, redovisningsekonom i Solna. Hon hjälper företagare att få ordning på bokföring, moms, deklarationer och kontakt med svenska myndigheter — på svenska, spanska och engelska.",
     "ctaTitle": "Vill du fråga om bokföring, moms eller deklaration?",
     "ctaText": "Skicka en förfrågan. Du förbinder dig inte till något genom att kontakta oss."
   },
@@ -123,7 +125,7 @@
         "bullets": ["Fakturering", "Fakturering av ROT och RUT", "Påminnelsehantering", "Fakturering åt dig vid behov", "Administrativa rutiner"]
       }
     ],
-    "pageTitle": "Tjänster för företagare som vill ha ordning på ekonomin",
+    "pageTitle": "Tjänster för företagare som vill ha ordning på bokföring, moms och deklaration",
     "pageText": "Tax Business Stockholm AB hjälper små och medelstora företag med bokföring, moms, deklarationer, bokslut, årsredovisning, löner och administration. Du kan få hjälp på svenska, spanska eller engelska."
   },
   "startCompany": {
@@ -134,14 +136,11 @@
   },
   "about": {
     "title": "En personlig redovisningsbyrå i Solna",
-    "text": [
-      "Tax Business Stockholm AB är en redovisningsbyrå i Solna som hjälper små och medelstora företag med bokföring, moms, deklarationer, bokslut, årsredovisning, löner och företagsadministration.",
-      "Vi arbetar särskilt med företagare som vill kunna få hjälp på spanska, svenska eller engelska. För många kunder handlar det inte bara om att lämna in rätt siffror, utan också om att förstå vad reglerna betyder i praktiken.",
-      "Ana Maria Alvarez driver Tax Business Stockholm AB och arbetar nära kunderna i den löpande ekonomin. Hon hjälper företagare att få ordning på underlag, rutiner, viktiga datum och kontakt med myndigheter."
-    ],
+    "text": ["Tax Business Stockholm AB är en redovisningsbyrå i Solna som hjälper små och medelstora företag med bokföring, moms, deklarationer, bokslut, årsredovisning, löner och företagsadministration.", "Vi arbetar på svenska, spanska och engelska. För många företagare handlar redovisning inte bara om att lämna in rätt siffror, utan också om att förstå vad reglerna betyder i praktiken. Därför lägger vi stor vikt vid att förklara vad som behöver göras, vilka datum som är viktiga och vilket underlag som behövs.", "Ana Maria Alvarez driver Tax Business Stockholm AB och arbetar nära kunderna i den löpande ekonomin. Hon hjälper företagare att få ordning på underlag, rutiner, moms, deklarationer och kontakt med myndigheter."],
     "person": "Ana Maria Alvarez",
     "role": "Redovisningsekonom",
-    "area": "Företagsstart och administration"
+    "area": "Företagsstart och administration",
+    "caption": "Ana Maria Alvarez, redovisningsekonom, Tax Business Stockholm AB"
   },
   "contact": {
     "title": "Kontakta Tax Business Stockholm AB",
@@ -156,7 +155,7 @@
     "email": "E-post",
     "phone": "Telefon",
     "company": "Företagsnamn",
-    "preferredLanguage": "Vilket språk föredrar du?",
+    "preferredLanguage": "Vilket språk vill du bli kontaktad på?",
     "helpWith": "Vad behöver du hjälp med?",
     "message": "Meddelande",
     "consent": "Jag godkänner att Tax Business Stockholm AB kontaktar mig angående min förfrågan.",
@@ -165,7 +164,7 @@
     "error": "Något behöver kompletteras. Kontrollera fälten och försök igen.",
     "rateLimit": "Du har skickat flera förfrågningar på kort tid. Vänta en stund och försök igen.",
     "required": "Obligatoriskt fält",
-    "options": ["Starta företag", "Bokföring", "Moms", "Deklaration", "Bokslut / årsredovisning", "Löner", "Brev eller frågor från Skatteverket", "Annat"]
+    "options": ["Bokföring", "Moms", "Deklaration", "Starta företag", "Löner", "Bokslut / årsredovisning", "Brev eller frågor från Skatteverket", "Annat"]
   },
   "privacy": {
     "title": "Integritet",

@@ -1,11 +1,14 @@
 import type {Metadata} from 'next';
+import Image from 'next/image';
 import {notFound} from 'next/navigation';
-import {Check, ImageIcon} from 'lucide-react';
+import {Check} from 'lucide-react';
 import {ContactForm} from '@/components/ContactForm';
 import {CTA} from '@/components/CTA';
 import {SectionIntro} from '@/components/SectionIntro';
 import {getDictionary} from '@/lib/dictionaries';
-import {allLocalizedPaths, hrefFor, isLocale, pageFromSlug, type Locale, type PageKey} from '@/lib/navigation';
+import {allLocalizedPaths, hrefFor, isLocale, locales, pageFromSlug, type Locale, type PageKey} from '@/lib/navigation';
+
+const anaMariaPortrait = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/images/ana-maria-alvarez.jpg`;
 
 export function generateStaticParams() {
   return allLocalizedPaths();
@@ -34,7 +37,8 @@ export async function generateMetadata({
     title: `${titles[page]} | Tax Business Stockholm AB`,
     description: dict.meta.description,
     alternates: {
-      canonical: hrefFor(rawLocale, page)
+      canonical: hrefFor(rawLocale, page),
+      languages: Object.fromEntries(locales.map((locale) => [locale, hrefFor(locale, page)]))
     },
     openGraph: {
       title: `${titles[page]} | Tax Business Stockholm AB`,
@@ -192,13 +196,18 @@ function AboutPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof getD
           </div>
         </div>
         <aside className="h-fit rounded-[2rem] border border-ink/10 bg-white p-8 shadow-soft">
-          <div className="mb-8 flex aspect-[4/5] items-center justify-center rounded-[1.5rem] border border-dashed border-ink/15 bg-paper text-ink/45">
-            <ImageIcon className="h-8 w-8" aria-hidden="true" />
-            <span className="sr-only">Portrait can be added later</span>
-          </div>
+          <Image
+            src={anaMariaPortrait}
+            alt={dict.about.person}
+            width={700}
+            height={900}
+            className="mb-6 aspect-[4/5] w-full rounded-[1.5rem] object-cover"
+            priority={false}
+          />
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper">{dict.about.area}</p>
           <h2 className="mt-5 font-serif text-4xl text-petroleum">{dict.about.person}</h2>
           <p className="mt-4 text-lg text-ink/72">{dict.about.role}</p>
+          <p className="mt-2 text-sm leading-6 text-ink/58">{dict.about.caption}</p>
         </aside>
       </div>
       <div className="mt-16">

@@ -23,7 +23,7 @@ export const localizedSlugs: Record<Locale, Record<Exclude<PageKey, 'home'>, str
   },
   en: {
     services: 'services',
-    startCompany: 'start-company',
+    startCompany: 'start-business',
     about: 'about',
     contact: 'contact',
     privacy: 'privacy'

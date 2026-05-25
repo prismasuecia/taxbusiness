@@ -5,7 +5,7 @@ import {SectionIntro} from '@/components/SectionIntro';
 import {TrustBar} from '@/components/TrustBar';
 import {getDictionary} from '@/lib/dictionaries';
 import {isLocale, type Locale} from '@/lib/navigation';
-import {ArrowUpRight} from 'lucide-react';
+import {ArrowUpRight, CheckCircle2, Languages, UserRound} from 'lucide-react';
 import {notFound} from 'next/navigation';
 
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
@@ -25,6 +25,9 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         secondary={dict.cta.services}
         niche={dict.home.heroNiche}
         languageLine={dict.home.heroLanguages}
+        visualEyebrow={dict.home.visualEyebrow}
+        visualTitle={dict.home.visualTitle}
+        visualText={dict.home.visualText}
         labels={dict.home.visualLabels}
       />
       <div className="px-4 sm:px-6 lg:px-8">
@@ -32,34 +35,24 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       </div>
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <SectionIntro title={dict.home.bridgeTitle} text={dict.home.bridgeText} />
-        <div className="border-y border-ink/10 py-2">
-          <div className="border-b border-ink/10 px-2 py-5">
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper">Suecia · Sverige</p>
-          </div>
-          <ul className="grid grid-cols-2 gap-px bg-ink/10 md:block md:bg-transparent md:divide-y md:divide-ink/10">
-            {dict.home.bridgeItems.map((item, index) => (
-              <li key={item} className="grid grid-cols-[2.25rem_1fr] items-center bg-paper px-3 py-4 md:grid-cols-[3.5rem_1fr] md:bg-transparent md:px-2 md:py-5">
-                <span className="text-xs text-ink/38 md:text-sm">0{index + 1}</span>
-                <span className="font-serif text-2xl text-petroleum md:text-3xl">{item}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="grid gap-3 sm:grid-cols-2">
+          {dict.home.bridgeItems.map((item) => (
+            <div key={item} className="flex items-center gap-3 border-b border-ink/10 py-4">
+              <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden="true" />
+              <span className="font-serif text-2xl text-petroleum">{item}</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 md:pb-20 lg:px-8">
         <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionIntro title={dict.home.servicesTitle} text={dict.home.servicesText} />
         </div>
-        <div className="grid border-y border-ink/10 md:grid-cols-2">
-          {dict.services.items.map((item, index) => (
-            <article
-              key={item.key}
-              className={`border-b border-ink/10 py-6 md:px-6 ${
-                index % 2 === 0 ? 'md:border-r' : ''
-              } ${index > 1 ? 'md:border-b-0' : ''}`}
-            >
-              <h3 className="font-serif text-3xl leading-tight text-petroleum">{item.title}</h3>
-              <p className="mt-3 max-w-lg leading-7 text-ink/68">{item.description}</p>
+        <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+          {dict.services.items.map((item) => (
+            <article key={item.key} className="bg-white p-6">
+              <h3 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h3>
+              <p className="mt-3 leading-7 text-ink/68">{item.description}</p>
               <LocaleLink
                 locale={locale}
                 page="services"
@@ -70,6 +63,44 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
               </LocaleLink>
             </article>
           ))}
+        </div>
+      </section>
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.2fr_1fr] lg:px-8">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-linen text-petroleum">
+            <Languages className="h-6 w-6" aria-hidden="true" />
+          </div>
+          <SectionIntro title={dict.home.languageTitle} text={dict.home.languageText} />
+        </div>
+      </section>
+      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+        <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
+        <div className="grid gap-4 md:grid-cols-3">
+          {dict.home.process.map((step) => (
+            <article key={step.title} className="rounded-[1.25rem] border border-ink/10 bg-white p-6">
+              <h3 className="font-serif text-2xl leading-tight text-petroleum">{step.title}</h3>
+              <p className="mt-3 leading-7 text-ink/68">{step.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">
+        <div className="grid gap-8 rounded-[1.5rem] border border-ink/10 bg-white p-6 md:grid-cols-[auto_1fr_auto] md:items-center md:p-8">
+          <div className="flex h-14 w-14 items-center justify-center rounded-full bg-linen text-petroleum">
+            <UserRound className="h-6 w-6" aria-hidden="true" />
+          </div>
+          <div>
+            <h2 className="font-serif text-3xl leading-tight text-petroleum md:text-4xl">{dict.home.aboutTitle}</h2>
+            <p className="mt-3 max-w-3xl leading-7 text-ink/68">{dict.home.aboutText}</p>
+          </div>
+          <LocaleLink
+            locale={locale}
+            page="about"
+            className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-semibold text-petroleum hover:bg-linen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-copper"
+          >
+            {dict.nav.about}
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </LocaleLink>
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">

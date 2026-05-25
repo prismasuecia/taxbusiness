@@ -33,8 +33,8 @@ export function Header({
             TB
           </span>
           <span className="leading-none">
-            <span className="block font-serif text-xl text-petroleum">Taxbusiness</span>
-            <span className="block text-xs font-semibold uppercase tracking-[0.26em] text-ink/55">Stockholm</span>
+            <span className="block font-serif text-xl text-petroleum">Tax Business</span>
+            <span className="block text-xs font-semibold uppercase tracking-[0.24em] text-ink/55">Stockholm AB</span>
           </span>
         </LocaleLink>
 
@@ -54,7 +54,7 @@ export function Header({
           ))}
         </nav>
 
-        <div className="hidden items-center gap-4 lg:flex">
+        <div className="hidden items-center gap-3 lg:flex">
           <LanguageSwitcher locale={locale} page={currentPage} />
           <LocaleLink
             locale={locale}
@@ -91,8 +91,10 @@ export function Header({
               </LocaleLink>
             ))}
           </nav>
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-3">
-            <LanguageSwitcher locale={locale} page={currentPage} />
+          <div className="mx-auto max-w-7xl">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.18em] text-ink/50">Språk / Idioma / Language</p>
+            <div className="flex items-center justify-between gap-3">
+              <LanguageSwitcher locale={locale} page={currentPage} />
             <LocaleLink
               locale={locale}
               page="contact"
@@ -101,6 +103,7 @@ export function Header({
             >
               {contactLabel}
             </LocaleLink>
+            </div>
           </div>
         </div>
       ) : null}

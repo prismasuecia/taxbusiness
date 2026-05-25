@@ -31,7 +31,7 @@ export async function generateMetadata({params}: {params: Promise<{locale: strin
       title: dict.meta.title,
       description: dict.meta.description,
       url: hrefFor(rawLocale, 'home'),
-      siteName: 'Taxbusiness Stockholm',
+      siteName: 'Tax Business Stockholm AB',
       locale: rawLocale,
       type: 'website'
     }
@@ -67,6 +67,9 @@ export default async function LocaleLayout({
           page="home"
           nav={nav}
           privacyLabel={dict.nav.privacy}
+          menuHeading={dict.footer.menuHeading}
+          contactHeading={dict.footer.contactHeading}
+          languageHeading={dict.footer.languageHeading}
           summary={dict.footer.summary}
           org={dict.footer.org}
           email={dict.footer.contact}

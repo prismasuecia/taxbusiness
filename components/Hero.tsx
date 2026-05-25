@@ -1,5 +1,4 @@
 import type {Locale} from '@/lib/navigation';
-import {DecorativeGrid} from './DecorativeGrid';
 import {LocaleLink} from './LocaleLink';
 
 export function Hero({
@@ -11,6 +10,9 @@ export function Hero({
   secondary,
   niche,
   languageLine,
+  visualEyebrow,
+  visualTitle,
+  visualText,
   labels
 }: {
   locale: Locale;
@@ -21,6 +23,9 @@ export function Hero({
   secondary: string;
   niche: string;
   languageLine: string;
+  visualEyebrow: string;
+  visualTitle: string;
+  visualText: string;
   labels: string[];
 }) {
   return (
@@ -51,7 +56,18 @@ export function Hero({
         </div>
       </div>
       <div className="hidden lg:block">
-        <DecorativeGrid labels={labels} />
+        <div className="rounded-[1.5rem] border border-ink/10 bg-white p-8 shadow-soft">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-copper">{visualEyebrow}</p>
+          <h2 className="mt-5 max-w-sm font-serif text-4xl leading-tight text-petroleum">{visualTitle}</h2>
+          <div className="mt-8 grid grid-cols-2 gap-3">
+            {labels.map((label) => (
+              <div key={label} className="rounded-2xl border border-ink/10 bg-paper px-4 py-4 text-sm font-medium text-petroleum">
+                {label}
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 border-t border-ink/10 pt-5 text-sm leading-6 text-ink/62">{visualText}</p>
+        </div>
       </div>
     </section>
   );

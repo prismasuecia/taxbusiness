@@ -1,12 +1,14 @@
-import {ArrowUpRight, Building2, Calculator, Landmark, UsersRound} from 'lucide-react';
+import {ArrowUpRight, Building2, Calculator, FileText, Landmark, ReceiptText, UsersRound} from 'lucide-react';
 import type {Locale, PageKey} from '@/lib/navigation';
 import {LocaleLink} from './LocaleLink';
 
 const icons = {
   company: Building2,
   accounting: Calculator,
+  taxes: FileText,
   payroll: UsersRound,
-  taxes: Landmark
+  authorities: Landmark,
+  invoicing: ReceiptText
 };
 
 export function ServiceCard({

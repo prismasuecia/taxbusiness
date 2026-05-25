@@ -30,7 +30,7 @@ export default async function Image({params}: {params: Promise<{locale: string}>
         }}
       >
         <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-          <div style={{fontSize: 42}}>Taxbusiness Stockholm</div>
+          <div style={{fontSize: 42}}>Tax Business Stockholm AB</div>
           <div style={{fontSize: 24, color: '#B98B5A'}}>Solna / Stockholm</div>
         </div>
         <div style={{fontSize: 76, lineHeight: 1.05, maxWidth: 920}}>{dict.home.heroTitle}</div>

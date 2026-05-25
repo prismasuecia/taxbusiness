@@ -1,10 +1,9 @@
 import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
-import {Check} from 'lucide-react';
+import {Check, ImageIcon} from 'lucide-react';
 import {ContactForm} from '@/components/ContactForm';
 import {CTA} from '@/components/CTA';
 import {SectionIntro} from '@/components/SectionIntro';
-import {ServiceCard} from '@/components/ServiceCard';
 import {getDictionary} from '@/lib/dictionaries';
 import {allLocalizedPaths, hrefFor, isLocale, pageFromSlug, type Locale, type PageKey} from '@/lib/navigation';
 
@@ -32,13 +31,13 @@ export async function generateMetadata({
   };
 
   return {
-    title: `${titles[page]} | Taxbusiness Stockholm`,
+    title: `${titles[page]} | Tax Business Stockholm AB`,
     description: dict.meta.description,
     alternates: {
       canonical: hrefFor(rawLocale, page)
     },
     openGraph: {
-      title: `${titles[page]} | Taxbusiness Stockholm`,
+      title: `${titles[page]} | Tax Business Stockholm AB`,
       description: dict.meta.description,
       url: hrefFor(rawLocale, page),
       type: 'website'
@@ -65,7 +64,7 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
         <div>
           <SectionIntro title={dict.contact.title} text={dict.contact.text} />
           <div className="mt-8 rounded-3xl border border-ink/10 bg-white p-6">
-            <p className="font-semibold text-petroleum">Taxbusiness Stockholm AB</p>
+            <p className="font-semibold text-petroleum">Tax Business Stockholm AB</p>
             <p className="mt-3 text-ink/68">{dict.footer.org}</p>
             <p className="mt-2 text-ink/68">{dict.contact.location}</p>
             <a href={`mailto:${dict.footer.contact}`} className="mt-2 block text-petroleum">
@@ -73,6 +72,7 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
             </a>
             <p className="mt-5 text-sm text-ink/55">{dict.contact.languages}</p>
             <p className="mt-4 border-t border-ink/10 pt-4 text-sm leading-6 text-ink/62">{dict.contact.response}</p>
+            <p className="mt-3 text-sm leading-6 text-ink/62">{dict.contact.reassurance}</p>
           </div>
         </div>
         <ContactForm locale={locale} labels={formLabels} options={dict.form.options} />
@@ -97,9 +97,12 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
     <main>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionIntro title={dict.services.pageTitle} text={dict.services.pageText} />
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
           {dict.services.items.map((item) => (
-            <ServiceCard key={item.key} item={item} locale={locale} hrefPage="contact" readMore={dict.cta.book} />
+            <article key={item.key} className="bg-white p-6">
+              <h2 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
+              <p className="mt-3 leading-7 text-ink/68">{item.description}</p>
+            </article>
           ))}
         </div>
       </section>
@@ -125,11 +128,10 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
       </section>
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
-        <ol className="grid gap-px overflow-hidden rounded-[2rem] border border-ink/10 bg-ink/10 md:grid-cols-2">
-          {dict.home.process.map((step, index) => (
+        <ol className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-3">
+          {dict.home.process.map((step) => (
             <li key={step.title} className="bg-white p-6">
-              <span className="text-sm font-semibold text-copper">0{index + 1}</span>
-              <h2 className="mt-5 font-serif text-3xl text-petroleum">{step.title}</h2>
+              <h2 className="font-serif text-3xl text-petroleum">{step.title}</h2>
               <p className="mt-3 leading-7 text-ink/68">{step.text}</p>
             </li>
           ))}
@@ -190,6 +192,10 @@ function AboutPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof getD
           </div>
         </div>
         <aside className="h-fit rounded-[2rem] border border-ink/10 bg-white p-8 shadow-soft">
+          <div className="mb-8 flex aspect-[4/5] items-center justify-center rounded-[1.5rem] border border-dashed border-ink/15 bg-paper text-ink/45">
+            <ImageIcon className="h-8 w-8" aria-hidden="true" />
+            <span className="sr-only">Portrait can be added later</span>
+          </div>
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-copper">{dict.about.area}</p>
           <h2 className="mt-5 font-serif text-4xl text-petroleum">{dict.about.person}</h2>
           <p className="mt-4 text-lg text-ink/72">{dict.about.role}</p>

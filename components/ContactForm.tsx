@@ -60,7 +60,7 @@ export function ContactForm({
     const phone = String(formData.get('phone') || '').trim();
     const company = String(formData.get('company') || '').trim();
     const preferredLanguage = String(formData.get('preferredLanguage') || locale);
-    const subject = 'Ny förfrågan från Taxbusiness.se';
+    const subject = 'Ny förfrågan från Tax Business Stockholm AB';
     const body = [
       'Ny kontaktförfrågan',
       '',

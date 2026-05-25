@@ -1,79 +1,79 @@
 {
   "meta": {
-    "title": "Taxbusiness Stockholm | Contabilidad en Suecia en español y sueco",
-    "description": "Taxbusiness Stockholm ayuda a pequeñas y medianas empresas en Suecia con contabilidad, declaraciones, informes anuales, sueldos y registro de empresas en español, sueco e inglés."
+    "title": "Tax Business Stockholm AB | Contabilidad en Suecia en español y sueco",
+    "description": "Oficina contable en Solna que ayuda a pequeñas y medianas empresas con contabilidad, IVA, declaraciones, cierres contables, informes anuales, nóminas y contacto con Skatteverket."
   },
-  "brand": {"name": "Taxbusiness", "place": "Stockholm"},
+  "brand": {"name": "Tax Business", "place": "Stockholm AB"},
   "nav": {"home": "Inicio", "services": "Servicios", "startCompany": "Crear empresa", "about": "Sobre nosotros", "contact": "Contacto", "privacy": "Privacidad"},
-  "cta": {"contact": "Contáctanos", "services": "Ver servicios", "book": "Solicitar contacto", "send": "Enviar consulta", "readMore": "Leer más"},
+  "cta": {"contact": "Contáctenos", "services": "Ver servicios", "book": "Contáctenos", "send": "Enviar consulta", "readMore": "Leer más"},
   "home": {
-    "heroEyebrow": "Asesoría contable para empresarios hispanohablantes en Estocolmo",
-    "heroTitle": "Contabilidad en español y sueco, con claridad, seguridad y servicio personal.",
-    "heroText": "Taxbusiness Stockholm ayuda a pequeñas y medianas empresas con contabilidad, declaraciones, cierre anual, informes anuales, sueldos y creación de empresa. Explicamos el sistema sueco en un idioma que te da seguridad.",
-    "heroNiche": "Especialistas en contabilidad para hispanohablantes en Suecia",
-    "heroLanguages": "Svenska · Español · English",
-    "visualLabels": ["IVA", "Cierre anual", "Declaración", "Sueldos", "Skatteverket"],
-    "trust": ["Para empresarios hispanohablantes", "Contabilidad en Estocolmo/Solna", "Contabilidad, declaraciones y cierre anual", "Contacto con Skatteverket", "Org.nr 559252-6726"],
-    "bridgeTitle": "Un puente seguro entre tu empresa y el sistema sueco",
-    "bridgeText": "Ayudamos a empresarios hispanohablantes a entender el IVA, las declaraciones, las fechas importantes y el contacto con Skatteverket. Sabrás qué hacer, cuándo y por qué.",
-    "bridgeItems": ["Skatteverket", "IVA", "Declaración", "Cierre anual", "Facturación", "Sueldos"],
-    "introTitle": "La economía de tu empresa debe sentirse clara, no complicada.",
-    "introText": "Te ayudamos a mantener ordenada la economía de tu empresa y explicamos qué debe hacerse, cuándo y por qué. El objetivo es que tengas tranquilidad y puedas concentrarte en tu actividad.",
-    "servicesTitle": "Servicios para una administración más clara",
-    "servicesText": "Cuatro áreas claras, adaptadas a pequeñas empresas.",
-    "languageTitle": "Ayuda económica en español, con precisión sueca",
-    "languageText": "El español es nuestra especialidad principal. También ayudamos en sueco e inglés cuando hace falta.",
+    "heroEyebrow": "Oficina contable en Solna para empresarios que quieren entender su economía",
+    "heroTitle": "Contabilidad, declaraciones y apoyo empresarial en sueco y español",
+    "heroText": "Tax Business Stockholm AB ayuda a pequeñas y medianas empresas con contabilidad, IVA, cierres contables, informes anuales, nóminas y contacto con Skatteverket. Explicamos qué hay que hacer, cuándo hay que hacerlo y por qué.",
+    "heroNiche": "Atención en sueco, español e inglés · Solna / Estocolmo · Org.nr 559252-6726",
+    "heroLanguages": "På svenska · En español · In English",
+    "visualEyebrow": "Documentos y rutinas",
+    "visualTitle": "Orden en lo que hay que entregar.",
+    "visualText": "Recibos, facturas, IVA y fechas importantes son más fáciles de seguir cuando las rutinas están claras.",
+    "visualLabels": ["Contabilidad", "IVA", "Declaraciones", "Cierre anual", "Nóminas", "Skatteverket"],
+    "trust": ["Oficina contable en Solna", "Contabilidad e IVA", "Declaraciones y cierre anual", "Ayuda en sueco y español", "Contacto con Skatteverket"],
+    "bridgeTitle": "Saber qué se necesita y cuándo",
+    "bridgeText": "Le explicamos qué documentos necesitamos, qué fechas son importantes y cuál es el siguiente paso. La idea es que pueda seguir la economía de su empresa sin tener que interpretar solo las reglas suecas.",
+    "bridgeItems": ["Documentos", "Fechas", "IVA", "Declaraciones", "Skatteverket", "Nóminas"],
+    "servicesTitle": "En qué podemos ayudar",
+    "servicesText": "Servicios prácticos para la vida diaria de una pequeña empresa.",
+    "languageTitle": "Para empresarios hispanohablantes en Suecia",
+    "languageText": "Muchos empresarios tienen buenas ideas y trabajan duro, pero el sistema sueco puede ser difícil de entender al principio. Puede tratarse del IVA, F-skatt, declaraciones, nóminas o cartas de Skatteverket. En Tax Business puede recibir ayuda en español, sueco o inglés, para entender qué pasa en su empresa y qué necesita hacer.",
     "languagePrimary": "Español",
-    "languagePrimaryText": "La especialidad principal: contabilidad y contacto con autoridades para empresarios hispanohablantes en Suecia.",
-    "languageSecondary": ["Svenska", "English"],
-    "processTitle": "Así empezamos con claridad desde el principio.",
-    "processText": "Tendrás un inicio tranquilo y ordenado donde revisamos las necesidades de la empresa, definimos rutinas y explicamos qué documentos se necesitan y cuándo.",
+    "languagePrimaryText": "Para empresarios que quieren entender la contabilidad, los impuestos y el contacto con autoridades en Suecia.",
+    "languageSecondary": ["På svenska", "In English"],
+    "processTitle": "Cómo funciona el primer contacto",
+    "processText": "No necesita tener todo preparado antes de escribirnos.",
     "process": [
-      {"title": "Primer contacto", "text": "Nos cuentas brevemente sobre tu empresa y qué tipo de ayuda necesitas."},
-      {"title": "Revisión", "text": "Vemos el alcance, fechas importantes, períodos de IVA y rutinas existentes."},
-      {"title": "Rutinas claras", "text": "Sabrás qué documentos se necesitan y cómo funciona la comunicación."},
-      {"title": "Seguimiento continuo", "text": "Damos respuesta a las preguntas a tiempo para que la economía no quede pendiente."}
+      {"title": "Envía una consulta", "text": "Cuéntenos brevemente qué necesita y qué idioma prefiere."},
+      {"title": "Revisamos su situación", "text": "Volvemos con preguntas o con una propuesta del siguiente paso."},
+      {"title": "Usted decide si quiere continuar", "text": "Contactarnos no significa ningún compromiso."}
     ],
-    "qualityTitle": "Seguridad en los detalles.",
-    "qualityText": "La contabilidad trata tanto de orden y comunicación como de números. Por eso Taxbusiness trabaja con conciliaciones claras, explicaciones sencillas y contacto personal.",
-    "quality": ["Información clara sobre lo que debe hacerse", "Contacto en español, sueco o inglés", "Estructura para IVA, declaraciones y fechas importantes", "Respuesta personal y rápida", "Respuesta personal de Ana Maria Alvarez"],
-    "pricingTitle": "Sin sorpresas antes de empezar.",
-    "pricingText": "El precio depende del tamaño de la empresa, número de comprobantes, sueldos, período de IVA y las partes en las que necesitas ayuda. Primero revisamos tus necesidades y proponemos una forma de trabajo adecuada.",
-    "fitTitle": "Para empresarios que quieren contacto cercano.",
-    "fitText": "Taxbusiness encaja especialmente bien con pequeñas y medianas empresas que quieren entender su economía, recibir respuesta rápida y poder hacer preguntas en el idioma que les da más seguridad.",
-    "aboutTitle": "Especialista para empresarios hispanohablantes en Suecia.",
-    "aboutText": "Ana Maria Alvarez ayuda a empresarios con contabilidad, administración, facturación y contacto con autoridades. Muchos clientes valoran poder entender las reglas suecas en español.",
-    "ctaTitle": "¿Quieres tener mejor orden en la economía de tu empresa?",
-    "ctaText": "Envíanos una consulta y te responderemos para explicar cómo podemos ayudarte."
+    "qualityTitle": "Forma de trabajar",
+    "qualityText": "Tax Business trabaja cerca del cliente, con explicaciones claras, seguimiento cuidadoso y apoyo práctico en la economía diaria.",
+    "quality": ["Información clara sobre documentos y fechas", "Contacto en sueco, español o inglés", "Ayuda con cartas y preguntas de Skatteverket", "Contacto personal con Ana Maria Alvarez"],
+    "pricingTitle": "El precio depende del alcance",
+    "pricingText": "Depende del número de documentos, período de IVA, nóminas y qué partes necesita. Lo revisamos antes de empezar.",
+    "fitTitle": "Para pequeñas empresas que quieren contacto cercano",
+    "fitText": "Tax Business es para empresarios que quieren poder hacer preguntas y entender qué pasa con la contabilidad, el IVA y las declaraciones.",
+    "aboutTitle": "Una oficina contable personal en Solna",
+    "aboutText": "Ana Maria Alvarez dirige Tax Business Stockholm AB y trabaja de cerca con los clientes en la economía diaria. Ayuda a empresarios a ordenar documentos, rutinas, fechas importantes y contacto con autoridades.",
+    "ctaTitle": "¿Quiere preguntar sobre contabilidad, IVA o declaraciones?",
+    "ctaText": "Envíe una consulta. Contactarnos no significa ningún compromiso."
   },
   "services": {
     "items": [
-      {"key": "company", "title": "Crear empresa en Suecia", "description": "Orientación sobre registro, Skatteverket, administración, facturación y las primeras rutinas.", "details": "Te ayudamos a empezar y mantener organizada la administración de tu empresa.", "bullets": ["Registro de empresa", "Contacto con Skatteverket", "Administración", "Gestión de pagos", "Facturación", "Facturación ROT y RUT", "Gestión de recordatorios de pago", "Facturación por ti cuando sea necesario"]},
-      {"key": "accounting", "title": "Contabilidad continua e IVA", "description": "Orden en comprobantes, conciliaciones, declaración de IVA y economía diaria.", "details": "Nos encargamos de la economía diaria y hacemos que la contabilidad sea clara y fácil de seguir.", "bullets": ["Contabilidad continua", "Registro y control de comprobantes", "Conciliaciones", "Declaración de IVA", "Cierre anual", "Informe anual", "Declaraciones"]},
-      {"key": "payroll", "title": "Sueldos, facturación y autoridades", "description": "Apoyo con sueldos, facturación, declaraciones de empleador y administración práctica.", "details": "Te ayudamos con sueldos y documentación necesaria para la administración de personal.", "bullets": ["Gestión de sueldos", "Datos de control", "Documentación para declaración de empleador"]},
-      {"key": "taxes", "title": "Declaración y cierre anual", "description": "Ayuda con declaraciones, impuestos y contacto con autoridades cuando la empresa necesita informar correctamente.", "details": "Te ayudamos con asuntos fiscales básicos y contacto con autoridades.", "bullets": ["Planificación fiscal básica", "Gestión de declaraciones fiscales", "Comunicación con autoridades"]}
+      {"key": "company", "title": "Crear empresa", "description": "Ayuda con forma de empresa, registro, F-skatt, IVA y primeras rutinas.", "details": "Le ayudamos a empezar y a mantener organizada la administración desde el principio.", "bullets": ["Registro de empresa", "Contacto con Skatteverket", "F-skatt e IVA", "Administración", "Gestión de pagos", "Primeras rutinas"]},
+      {"key": "accounting", "title": "Contabilidad continua e IVA", "description": "Orden en recibos, facturas, conciliaciones y declaración de IVA.", "details": "Nos ocupamos de la economía diaria para que la contabilidad sea fácil de seguir.", "bullets": ["Contabilidad continua", "Control de comprobantes", "Conciliaciones", "Declaración de IVA", "Recibos y facturas", "Documentos para declaraciones"]},
+      {"key": "taxes", "title": "Cierre anual, informe anual y declaraciones", "description": "Ayuda cuando el año debe cerrarse y la información debe entregarse correctamente.", "details": "Ayudamos con cierres, informes y declaraciones al terminar el año fiscal.", "bullets": ["Cierre anual", "Informe anual", "Declaraciones", "Declaraciones fiscales", "Preguntas fiscales básicas", "Fechas importantes"]},
+      {"key": "payroll", "title": "Nóminas y declaraciones de empleador", "description": "Apoyo con nóminas, declaraciones de empleador y administración práctica.", "details": "Ayudamos con nóminas y los datos necesarios para las declaraciones de empleador.", "bullets": ["Gestión de nóminas", "Datos para declaración de empleador", "Datos de control", "Administración de personal"]},
+      {"key": "authorities", "title": "Contacto con Skatteverket", "description": "Ayuda para entender cartas, preguntas, complementos y fechas importantes.", "details": "Ayudamos a entender qué pide la autoridad y qué documentos se necesitan.", "bullets": ["Cartas de Skatteverket", "Complementos", "Preguntas sobre IVA", "Preguntas sobre declaraciones", "Contacto con autoridades"]},
+      {"key": "invoicing", "title": "Facturación, ROT/RUT y administración", "description": "Apoyo con facturas, documentos y rutinas que facilitan el día a día.", "details": "Ayudamos con la administración que necesita funcionar de forma continua.", "bullets": ["Facturación", "Facturación ROT y RUT", "Recordatorios de pago", "Facturación en su nombre cuando sea necesario", "Rutinas administrativas"]}
     ],
-    "pageTitle": "Servicios para empresarios que quieren una economía clara",
-    "pageText": "Ayudamos a pequeñas y medianas empresas con contabilidad, administración, sueldos, declaraciones y contacto con autoridades. Puedes recibir ayuda en sueco, español o inglés."
+    "pageTitle": "Servicios para empresarios que quieren ordenar su economía",
+    "pageText": "Tax Business Stockholm AB ayuda a pequeñas y medianas empresas con contabilidad, IVA, declaraciones, cierre anual, informes anuales, nóminas y administración. Puede recibir ayuda en sueco, español o inglés."
   },
   "startCompany": {
-    "title": "Crear una empresa en Suecia con orientación clara",
-    "text": "Crear una empresa incluye varios pasos prácticos. Te ayudamos con el registro, el contacto con Skatteverket y la administración necesaria para empezar correctamente.",
-    "items": ["Elegir forma de empresa", "Registro", "F-skatt e IVA", "Facturación", "Contabilidad continua", "Fechas importantes", "Contacto con autoridades"],
-    "cta": "¿Quieres crear una empresa? Contáctanos y revisamos qué necesitas hacer."
+    "title": "Crear una empresa en Suecia con buenas rutinas desde el inicio",
+    "text": "Crear una empresa implica elegir forma jurídica, registrarse, F-skatt, IVA y contabilidad continua. Le ayudamos a entender qué hacer y en qué orden.",
+    "items": ["Elegir forma de empresa", "Registro", "F-skatt e IVA", "Facturación", "Contabilidad continua", "Fechas importantes", "Contacto con Skatteverket"],
+    "cta": "¿Quiere crear una empresa? Contáctenos y revisamos qué necesita hacer."
   },
   "about": {
-    "title": "Sobre Taxbusiness Stockholm",
-    "text": ["Taxbusiness Stockholm es una asesoría contable en Solna que ayuda a pequeñas y medianas empresas con contabilidad, declaraciones y administración.", "Damos mucha importancia al servicio personal, la información clara y la respuesta rápida. Muchos empresarios valoran poder recibir ayuda en su propio idioma. Por eso ofrecemos servicios en sueco, español e inglés.", "Nuestro objetivo es que ninguna empresa se sienta demasiado pequeña para recibir apoyo profesional."],
+    "title": "Una oficina contable personal en Solna",
+    "text": ["Tax Business Stockholm AB es una oficina contable en Solna que ayuda a pequeñas y medianas empresas con contabilidad, IVA, declaraciones, cierres contables, informes anuales, nóminas y administración.", "Trabajamos especialmente con empresarios que quieren recibir ayuda en español, sueco o inglés. Para muchos clientes no se trata solo de entregar los números correctos, sino de entender qué significan las reglas en la práctica.", "Ana Maria Alvarez dirige Tax Business Stockholm AB y trabaja de cerca con los clientes en la economía diaria. Ayuda a ordenar documentos, rutinas, fechas importantes y contacto con autoridades."],
     "person": "Ana Maria Alvarez",
     "role": "Economista contable",
     "area": "Creación de empresa y administración"
   },
-  "contact": {"title": "Contacta con Taxbusiness Stockholm", "text": "¿Tienes preguntas sobre contabilidad, declaraciones, creación de empresa o sueldos? Envía una consulta y te responderemos.", "location": "Solna / Estocolmo, Suecia", "languages": "Sueco, español e inglés", "response": "Te responderemos lo antes posible y explicaremos qué forma de trabajo se adapta a tu situación."},
-  "form": {
-    "name": "Nombre", "email": "Correo electrónico", "phone": "Teléfono", "company": "Nombre de la empresa", "preferredLanguage": "Idioma en el que quiero ser contactado", "helpWith": "¿Con qué necesitas ayuda?", "message": "Mensaje", "consent": "Acepto que Taxbusiness Stockholm me contacte sobre mi consulta.", "privacy": "Usamos tus datos solo para responder a tu consulta.", "success": "¡Gracias! Hemos recibido tu consulta y te responderemos lo antes posible.", "error": "Algo salió mal. Inténtalo de nuevo o contáctanos por correo electrónico.", "rateLimit": "Has enviado varias consultas en poco tiempo. Espera un momento e inténtalo de nuevo.", "required": "Campo obligatorio", "options": ["Contabilidad", "Declaración", "Crear empresa", "Sueldos", "IVA", "Informe anual", "Otro"]
-  },
-  "privacy": {"title": "Privacidad", "text": ["Usamos los datos de contacto que envías por el formulario solo para responder a tu consulta.", "Los datos no se venden a terceros ni se usan para marketing sin tu consentimiento.", "Puedes contactarnos si quieres saber qué datos están guardados o solicitar que se eliminen."]},
-  "faq": {"title": "Preguntas frecuentes", "items": [{"question": "¿Puedo recibir ayuda en español?", "answer": "Sí. Taxbusiness ofrece ayuda en sueco, español e inglés para que puedas entender la economía y el contacto con autoridades en un idioma seguro para ti."}, {"question": "¿Mi empresa tiene que ser grande para recibir ayuda?", "answer": "No. El objetivo es que también las empresas pequeñas puedan recibir apoyo profesional con rutinas claras y contacto personal."}, {"question": "¿Cómo sé cuánto costará?", "answer": "Primero revisamos el alcance y las necesidades de la empresa. Después podemos proponer una forma de trabajo antes de empezar."}, {"question": "¿Pueden ayudarme con Skatteverket?", "answer": "Sí. El contacto con Skatteverket y la comunicación con autoridades son áreas en las que Taxbusiness ayuda a empresarios."}]},
-  "footer": {"summary": "Una asesoría contable personal en Solna para empresarios que quieren una economía clara en sueco, español o inglés.", "org": "Org.nr 559252-6726", "contact": "info@taxbusiness.se"}
+  "contact": {"title": "Contacte con Tax Business Stockholm AB", "text": "¿Tiene preguntas sobre contabilidad, IVA, declaraciones, creación de empresa o nóminas? Envíe una consulta y le responderemos.", "location": "Solna / Estocolmo, Suecia", "languages": "Sueco, español e inglés", "response": "Le responderemos lo antes posible y explicaremos cómo podemos ayudar.", "reassurance": "Contactarnos no significa ningún compromiso."},
+  "form": {"name": "Nombre", "email": "Correo electrónico", "phone": "Teléfono", "company": "Nombre de la empresa", "preferredLanguage": "¿Qué idioma prefiere?", "helpWith": "¿Con qué necesita ayuda?", "message": "Mensaje", "consent": "Acepto que Tax Business Stockholm AB me contacte sobre mi consulta.", "privacy": "Usamos sus datos solo para responder a su consulta.", "success": "¡Gracias! Hemos recibido su consulta y le responderemos lo antes posible.", "error": "Falta información. Revise los campos e inténtelo de nuevo.", "rateLimit": "Ha enviado varias consultas en poco tiempo. Espere un momento e inténtelo de nuevo.", "required": "Campo obligatorio", "options": ["Crear empresa", "Contabilidad", "IVA", "Declaración", "Cierre anual / informe anual", "Nóminas", "Carta o pregunta de Skatteverket", "Otro"]},
+  "privacy": {"title": "Privacidad", "text": ["Usamos los datos de contacto que envía por el formulario solo para responder a su consulta.", "Los datos no se venden a terceros ni se usan para marketing sin su consentimiento.", "Puede contactarnos si quiere saber qué datos están guardados o solicitar que se eliminen."]},
+  "faq": {"title": "Preguntas frecuentes", "items": [{"question": "¿Puedo recibir ayuda en español?", "answer": "Sí. Tax Business ayuda en sueco, español e inglés."}, {"question": "¿Mi empresa tiene que ser grande?", "answer": "No. Trabajamos con pequeñas y medianas empresas."}, {"question": "¿Me comprometo al contactarles?", "answer": "No. Una primera consulta solo nos permite revisar qué necesita."}, {"question": "¿Pueden ayudar con Skatteverket?", "answer": "Sí. Ayudamos a entender cartas, preguntas, complementos y fechas importantes."}]},
+  "footer": {"summary": "Oficina contable en Solna para pequeñas y medianas empresas que quieren ayuda en sueco, español o inglés.", "org": "Org.nr 559252-6726", "contact": "info@taxbusiness.se", "menuHeading": "Menú", "contactHeading": "Contacto", "languageHeading": "Idioma"}
 }

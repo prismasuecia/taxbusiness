@@ -102,7 +102,7 @@ export async function submitContactForm(
   }
 
   try {
-    await sendMail('Ny förfrågan från Taxbusiness.se', formatBody(parsed.data), parsed.data.email);
+    await sendMail('Ny förfrågan från Tax Business Stockholm AB', formatBody(parsed.data), parsed.data.email);
     return {status: 'success'};
   } catch (error) {
     console.error('Contact form email failed', error);

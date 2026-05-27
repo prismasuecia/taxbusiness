@@ -33,6 +33,11 @@ a {
   text-decoration: none;
 }
 
+label[for="website"],
+input[name="website"] {
+  display: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

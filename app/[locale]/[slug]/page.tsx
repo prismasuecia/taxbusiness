@@ -132,14 +132,14 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
       </section>
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
         <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
-        <ol className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-3">
+        <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-3">
           {dict.home.process.map((step) => (
-            <li key={step.title} className="bg-white p-6">
-              <p className="font-serif text-3xl text-petroleum">{step.title}</p>
+            <article key={step.title} className="bg-white p-6">
+              <h2 className="font-serif text-3xl text-petroleum">{step.title}</h2>
               <p className="mt-3 leading-7 text-ink/68">{step.text}</p>
-            </li>
+            </article>
           ))}
-        </ol>
+        </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <CTA locale={locale} title={dict.home.ctaTitle} text={dict.home.ctaText} label={dict.cta.contact} />
@@ -158,14 +158,14 @@ function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<type
   return (
     <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
       <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} />
-      <ol className="mt-12 list-decimal space-y-4 pl-6">
+      <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
         {sections.map((item) => (
-          <li key={item.title} className="pl-2 text-petroleum">
-            <span className="font-serif text-2xl leading-tight text-petroleum">{item.title}</span>
+          <section key={item.title} className="bg-white p-6">
+            <h2 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
             {item.text ? <p className="mt-3 leading-7 text-ink/68">{item.text}</p> : null}
-          </li>
+          </section>
         ))}
-      </ol>
+      </div>
       <div className="mt-16">
         <CTA locale={locale} title={dict.startCompany.cta} text={ctaText} label={dict.cta.contact} />
       </div>

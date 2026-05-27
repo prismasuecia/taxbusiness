@@ -101,7 +101,8 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
     <main>
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <SectionIntro title={dict.services.pageTitle} text={dict.services.pageText} />
-        <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
+        {locale === 'sv' ? <h2 className="mt-12 font-serif text-3xl text-petroleum">Översikt</h2> : null}
+        <div className="mt-6 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
           {dict.services.items.map((item) => (
             <article key={item.key} className="bg-white p-6">
               <h2 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h2>
@@ -112,6 +113,7 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
       </section>
       <section className="bg-white py-20">
         <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:px-6 lg:px-8">
+          {locale === 'sv' ? <h2 className="font-serif text-3xl text-petroleum">Vad ingår?</h2> : null}
           {dict.services.items.map((item) => (
             <article key={item.key} className="grid gap-8 border-b border-ink/10 py-10 last:border-0 lg:grid-cols-[0.55fr_1fr]">
               <div>
@@ -131,7 +133,7 @@ function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof g
         </div>
       </section>
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8">
-        <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
+        <SectionIntro title={locale === 'sv' ? 'Så börjar samarbetet' : dict.home.processTitle} text={dict.home.processText} />
         <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-3">
           {dict.home.process.map((step) => (
             <article key={step.title} className="bg-white p-6">

@@ -10,6 +10,7 @@ import Image from 'next/image';
 import {notFound} from 'next/navigation';
 
 const anaMariaPortrait = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/images/ana-maria-alvarez.jpg`;
+const ucGoldLogo = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/brand/uc-guld.jpeg`;
 
 export default async function HomePage({params}: {params: Promise<{locale: string}>}) {
   const {locale: rawLocale} = await params;
@@ -32,6 +33,19 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       <div className="px-4 sm:px-6 lg:px-8">
         <TrustBar items={dict.home.trust} />
       </div>
+      {locale === 'sv' ? (
+        <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 border-y border-ink/10 bg-white/60 px-5 py-5 sm:flex-row sm:items-center">
+            <Image src={ucGoldLogo} alt="UC Guld" width={70} height={66} className="h-14 w-auto shrink-0 object-contain" />
+            <div>
+              <h2 className="text-sm font-semibold text-petroleum">UC Guld – högsta kreditvärdighet</h2>
+              <p className="mt-1 max-w-3xl text-sm leading-6 text-ink/68">
+                Tax Business Stockholm AB är klassat i UC Riskklass 5, den högsta riskklassen. Det är ett externt kreditbetyg som visar mycket god kreditvärdighet.
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
         <SectionIntro title={dict.home.bridgeTitle} text={dict.home.bridgeText} />
         <div className="grid gap-3 sm:grid-cols-2">

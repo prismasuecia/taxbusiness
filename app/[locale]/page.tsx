@@ -2,9 +2,11 @@ import {CTA} from '@/components/CTA';
 import {Hero} from '@/components/Hero';
 import {LocaleLink} from '@/components/LocaleLink';
 import {SectionIntro} from '@/components/SectionIntro';
+import {StructuredData} from '@/components/StructuredData';
 import {TrustBar} from '@/components/TrustBar';
 import {getDictionary} from '@/lib/dictionaries';
 import {isLocale, type Locale} from '@/lib/navigation';
+import {breadcrumbJsonLd} from '@/lib/seo';
 import {ArrowUpRight, CheckCircle2} from 'lucide-react';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
@@ -20,6 +22,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
 
   return (
     <main>
+      <StructuredData data={breadcrumbJsonLd(locale, 'home', dict.nav.home)} />
       <Hero
         locale={locale}
         eyebrow={dict.home.heroEyebrow}

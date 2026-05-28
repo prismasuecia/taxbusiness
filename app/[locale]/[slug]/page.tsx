@@ -5,8 +5,10 @@ import {Check} from 'lucide-react';
 import {ContactForm} from '@/components/ContactForm';
 import {CTA} from '@/components/CTA';
 import {SectionIntro} from '@/components/SectionIntro';
+import {StructuredData} from '@/components/StructuredData';
 import {getDictionary} from '@/lib/dictionaries';
-import {allLocalizedPaths, hrefFor, isLocale, locales, pageFromSlug, type Locale, type PageKey} from '@/lib/navigation';
+import {allLocalizedPaths, hrefFor, isLocale, pageFromSlug, type Locale} from '@/lib/navigation';
+import {absoluteUrl, breadcrumbJsonLd, languageAlternates, pageSeo} from '@/lib/seo';
 
 const anaMariaPortrait = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/images/ana-maria-alvarez.jpg`;
 
@@ -23,28 +25,37 @@ export async function generateMetadata({
   if (!isLocale(rawLocale)) return {};
   const page = pageFromSlug(rawLocale, slug);
   if (!page) return {};
-  const dict = getDictionary(rawLocale);
-  const titles: Record<PageKey, string> = {
-    home: dict.meta.title,
-    services: dict.services.pageTitle,
-    startCompany: dict.startCompany.title,
-    about: dict.about.title,
-    contact: dict.contact.title,
-    privacy: dict.privacy.title
-  };
-
+  const seo = pageSeo[rawLocale][page];
   return {
-    title: `${titles[page]} | Tax Business Stockholm AB`,
-    description: dict.meta.description,
+    title: seo.title,
+    description: seo.description,
+    keywords: seo.keywords,
     alternates: {
-      canonical: hrefFor(rawLocale, page),
-      languages: Object.fromEntries(locales.map((locale) => [locale, hrefFor(locale, page)]))
+      canonical: absoluteUrl(hrefFor(rawLocale, page)),
+      languages: languageAlternates(page)
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-image-preview': 'large',
+        'max-snippet': -1
+      }
     },
     openGraph: {
-      title: `${titles[page]} | Tax Business Stockholm AB`,
-      description: dict.meta.description,
-      url: hrefFor(rawLocale, page),
-      type: 'website'
+      title: seo.title,
+      description: seo.description,
+      url: absoluteUrl(hrefFor(rawLocale, page)),
+      type: 'website',
+      images: [{url: '/brand/tax-business-logo-cropped.jpg', width: 1600, height: 1200, alt: 'Tax Business Stockholm AB'}]
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: seo.title,
+      description: seo.description,
+      images: ['/brand/tax-business-logo-cropped.jpg']
     }
   };
 }
@@ -65,8 +76,9 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
   if (page === 'contact') {
     return (
       <main className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+        <StructuredData data={breadcrumbJsonLd(locale, page, dict.contact.title)} />
         <div>
-          <SectionIntro title={dict.contact.title} text={dict.contact.text} />
+          <SectionIntro title={dict.contact.title} text={dict.contact.text} headingLevel={1} />
           <div className="mt-8 rounded-3xl border border-ink/10 bg-white p-6">
             <p className="font-semibold text-petroleum">Tax Business Stockholm AB</p>
             <p className="mt-3 text-ink/68">{dict.footer.org}</p>
@@ -86,7 +98,8 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-20 sm:px-6 lg:px-8">
-      <SectionIntro title={dict.privacy.title} />
+      <StructuredData data={breadcrumbJsonLd(locale, page, dict.privacy.title)} />
+      <SectionIntro title={dict.privacy.title} headingLevel={1} />
       <div className="mt-8 space-y-5 text-lg leading-8 text-ink/72">
         {dict.privacy.text.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
@@ -99,8 +112,9 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
 function ServicesPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof getDictionary>}) {
   return (
     <main>
+      <StructuredData data={breadcrumbJsonLd(locale, 'services', dict.services.pageTitle)} />
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <SectionIntro title={dict.services.pageTitle} text={dict.services.pageText} />
+        <SectionIntro title={dict.services.pageTitle} text={dict.services.pageText} headingLevel={1} />
         {locale === 'sv' ? <h2 className="mt-12 font-serif text-3xl text-petroleum">Översikt</h2> : null}
         <div className="mt-6 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
           {dict.services.items.map((item) => (
@@ -159,7 +173,8 @@ function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<type
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-      <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} />
+      <StructuredData data={breadcrumbJsonLd(locale, 'startCompany', dict.startCompany.title)} />
+      <SectionIntro title={dict.startCompany.title} text={dict.startCompany.text} headingLevel={1} />
       <div className="mt-12 grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
         {sections.map((item) => (
           <section key={item.title} className="bg-white p-6">
@@ -178,9 +193,10 @@ function StartCompanyPage({locale, dict}: {locale: Locale; dict: ReturnType<type
 function AboutPage({locale, dict}: {locale: Locale; dict: ReturnType<typeof getDictionary>}) {
   return (
     <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <StructuredData data={breadcrumbJsonLd(locale, 'about', dict.about.title)} />
       <div className="grid gap-12 lg:grid-cols-[1fr_0.75fr]">
         <div>
-          <SectionIntro title={dict.about.title} />
+          <SectionIntro title={dict.about.title} headingLevel={1} />
           <div className="mt-8 space-y-5 text-lg leading-8 text-ink/72">
             {dict.about.text.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>

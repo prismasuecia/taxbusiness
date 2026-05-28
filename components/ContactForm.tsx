@@ -32,7 +32,7 @@ export function ContactForm({
   const [fieldErrors, setFieldErrors] = useState<Record<string, boolean>>({});
   const alertMessage = status === 'success' ? labels.success : status === 'error' ? labels.error : null;
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const formData = new FormData(form);
@@ -57,29 +57,44 @@ export function ContactForm({
     }
 
     setPending(true);
+    setStatus('idle');
     const phone = String(formData.get('phone') || '').trim();
     const company = String(formData.get('company') || '').trim();
     const preferredLanguage = String(formData.get('preferredLanguage') || locale);
     const subject = 'Ny förfrågan från Tax Business Stockholm AB';
-    const body = [
-      'Ny kontaktförfrågan',
-      '',
-      `Namn: ${name}`,
-      `E-post: ${email}`,
-      `Telefon: ${phone || '-'}`,
-      `Företagsnamn: ${company || '-'}`,
-      `Önskat språk: ${preferredLanguage}`,
-      `Behöver hjälp med: ${helpWith.join(', ')}`,
-      'Meddelande:',
-      message,
-      '',
-      'Skickat från:',
-      'taxbusiness.se'
-    ].join('\n');
 
-    window.location.href = `mailto:info@taxbusiness.se?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('success');
-    setPending(false);
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          _subject: subject,
+          _template: 'table',
+          _captcha: 'false',
+          _honey: '',
+          Namn: name,
+          'E-post': email,
+          Telefon: phone || '-',
+          Företagsnamn: company || '-',
+          'Önskat språk': preferredLanguage,
+          'Behöver hjälp med': helpWith.join(', '),
+          Meddelande: message,
+          'Skickat från': 'taxbusiness.se'
+        })
+      });
+
+      if (!response.ok) throw new Error('Form submission failed');
+      form.reset();
+      setFieldErrors({});
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    } finally {
+      setPending(false);
+    }
   }
 
   return (

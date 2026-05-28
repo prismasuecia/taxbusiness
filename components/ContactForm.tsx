@@ -45,7 +45,7 @@ export function ContactForm({
     const nextErrors = {
       name: name.length < 2,
       email: !email.includes('@'),
-      message: message.length < 10,
+      message: message.length === 0,
       helpWith: helpWith.length === 0,
       consent: !consent
     };

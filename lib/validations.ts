@@ -7,7 +7,7 @@ export const contactSchema = z.object({
   company: z.string().trim().optional(),
   preferredLanguage: z.enum(['sv', 'es', 'en']),
   helpWith: z.array(z.string()).min(1, 'helpWith'),
-  message: z.string().trim().min(10, 'message'),
+  message: z.string().trim().min(1, 'message'),
   consent: z.literal('on', {
     errorMap: () => ({message: 'consent'})
   }),

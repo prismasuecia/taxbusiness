@@ -76,6 +76,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if(location.protocol==='http:'&&/^(www\\.)?taxbusiness\\.se$/.test(location.hostname)){location.replace('https://taxbusiness.se'+location.pathname+location.search+location.hash)}"
+          }}
+        />
         <StructuredData data={businessJsonLd(locale)} />
         <StructuredData data={websiteJsonLd(locale)} />
         <Header locale={locale} page="home" nav={nav} contactLabel={dict.cta.book} />

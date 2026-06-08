@@ -18,16 +18,16 @@
   "cta": {
     "contact": "Kontakta oss",
     "services": "Se våra tjänster",
-    "book": "Kontakta oss",
+    "book": "Boka ett första samtal",
     "send": "Skicka förfrågan",
     "readMore": "Läs mer"
   },
   "home": {
-    "heroEyebrow": "Redovisningsbyrå i Solna för företagare som vill förstå sin ekonomi",
-    "heroTitle": "Bokföring, deklaration och företagsstöd på svenska och spanska",
-    "heroText": "Tax Business Stockholm AB hjälper små och medelstora företag med bokföring, moms, bokslut, årsredovisning, löner och kontakt med Skatteverket. Vi förklarar vad som behöver göras, när det ska göras och varför.",
-    "heroNiche": "Hjälp på svenska, spanska och engelska · Solna / Stockholm · Org.nr 559252-6726",
-    "heroLanguages": "På svenska · En español · In English",
+    "heroEyebrow": "Redovisningsbyrå för spansktalande företagare i Stockholm",
+    "heroTitle": "Bokföring och deklaration i Sverige – förklarat på spanska och svenska.",
+    "heroText": "Tax Business Stockholm AB hjälper företagare med bokföring, moms, deklaration, bokslut, löner och företagsstart. Vi förklarar det svenska systemet på ett språk du känner dig trygg med.",
+    "heroNiche": "Hablamos tu idioma. Entendemos el sistema sueco.",
+    "heroLanguages": "Tax Business Stockholm AB · Org.nr 559252-6726 · Solna / Stockholm · Svenska / Español",
     "trust": [
       "Redovisningsbyrå i Solna",
       "Bokföring och moms",
@@ -35,11 +35,12 @@
       "Hjälp på svenska och spanska",
       "Kontakt med Skatteverket"
     ],
-    "bridgeTitle": "Du ska veta vad som behövs och när",
-    "bridgeText": "Vi berättar vilka underlag vi behöver, vilka datum som är viktiga och vad nästa steg är. Målet är att du ska kunna följa företagets ekonomi utan att behöva tolka reglerna på egen hand.",
-    "bridgeItems": ["Underlag", "Datum", "Moms", "Deklaration", "Skatteverket", "Löner"],
+    "bridgeTitle": "En trygg bro mellan ditt företag och det svenska systemet",
+    "bridgeText": "Att driva företag i Sverige innebär moms, bokföring, deklarationer, viktiga datum och kontakt med Skatteverket. För många spansktalande företagare blir det lättare när någon kan förklara vad som gäller på spanska, utan att tappa den noggrannhet som krävs i Sverige.",
+    "bridgeItems": ["Brev från Skatteverket du inte förstår?", "Osäker på vilka underlag som behövs?", "Behöver du hjälp med moms, fakturor eller deklaration?", "Vill du kunna ställa frågor på spanska?"],
+    "bridgeClosing": "Tax Business hjälper dig att förstå vad som behöver göras, varför det behöver göras och när.",
     "servicesTitle": "Det här hjälper vi till med",
-    "servicesText": "Tjänsterna är praktiska och nära företagets vardag. Du får hjälp med det som ska göras, utan onödigt krångel.",
+    "servicesText": "Hjälp med konkreta delar av företagets ekonomi: kvitton, fakturor, momsdatum, deklarationer, löner och kontakt med Skatteverket.",
     "languageTitle": "För spansktalande företagare i Sverige",
     "languageText": "Många företagare har goda idéer och arbetar hårt, men tycker att det svenska systemet är svårt att överblicka. Det kan handla om moms, F-skatt, deklarationer, arbetsgivardeklarationer eller brev från Skatteverket. Hos Tax Business kan du få hjälp på spanska, svenska eller engelska, så att du förstår vad som händer i företaget och vad som behöver göras.",
     "languagePrimary": "Español",
@@ -76,7 +77,15 @@
     "aboutTitle": "En personlig redovisningsbyrå i Solna",
     "aboutText": "Ana Maria Alvarez driver Tax Business Stockholm AB och arbetar nära kunderna i den löpande ekonomin. Hon hjälper företagare att få ordning på underlag, rutiner, viktiga datum och kontakt med myndigheter.",
     "personTitle": "Personlig kontakt med Ana Maria Alvarez",
-    "personText": "Bakom Tax Business Stockholm AB finns Ana Maria Alvarez, redovisningsekonom i Solna. Hon hjälper företagare att få ordning på bokföring, moms, deklarationer och kontakt med svenska myndigheter — på svenska, spanska och engelska.",
+    "personText": "Ana Maria Alvarez hjälper företagare med redovisning, administration, fakturering och kontakt med myndigheter. Många kunder uppskattar särskilt att kunna få bokföring, deklarationer och frågor om Skatteverket förklarade på spanska – med den struktur och noggrannhet som krävs i Sverige.",
+    "personQuote": "Mitt mål är att du ska förstå vad som behöver göras – inte bara lämna ifrån dig papper.",
+    "portalTitle": "En trygg plats för dina dokument",
+    "portalText": "Som kund ska du kunna ladda upp bokföringsunderlag, kvitton och andra dokument i en säker kundportal i stället för att skicka känsliga filer via mejl. Du kan se vilka dokument du har laddat upp, och Tax Business får en notis när nytt material finns tillgängligt.",
+    "portalCta": "Kundinlogg",
+    "portalNote": "Kundportalen byggs för att göra dokumenthanteringen enklare, tryggare och mer överskådlig.",
+    "portalFeatureUpload": "Ladda upp kvitton och bokföringsunderlag",
+    "portalFeatureOverview": "Se vilka dokument du redan har skickat",
+    "portalFeatureNotice": "Tax Business får notis när nytt material finns",
     "ctaTitle": "Vill du fråga om bokföring, moms eller deklaration?",
     "ctaText": "Skicka en förfrågan. Du förbinder dig inte till något genom att kontakta oss."
   },
@@ -84,7 +93,7 @@
     "items": [
       {
         "key": "company",
-        "title": "Starta företag",
+        "title": "Starta företag i Sverige",
         "description": "Hjälp med företagsform, registrering, F-skatt, moms och de första rutinerna.",
         "details": "Vi hjälper dig att komma igång och hålla ordning på företagets administration från början.",
         "bullets": ["Registrering av företag", "Kontakt med Skatteverket", "F-skatt och moms", "Administration", "Hantering av betalningar", "Första rutinerna"]
@@ -98,14 +107,14 @@
       },
       {
         "key": "taxes",
-        "title": "Bokslut, årsredovisning och deklaration",
+        "title": "Deklaration och bokslut",
         "description": "Hjälp när året ska avslutas och uppgifter ska lämnas in korrekt.",
         "details": "Vi hjälper dig med avslut, rapportering och deklarationer när räkenskapsåret är slut.",
         "bullets": ["Årsbokslut", "Årsredovisning", "Deklarationer", "Skattedeklarationer", "Grundläggande skattefrågor", "Viktiga datum"]
       },
       {
         "key": "payroll",
-        "title": "Löner och arbetsgivardeklarationer",
+        "title": "Löner, fakturering och myndighetskontakt",
         "description": "Stöd med löner, arbetsgivardeklarationer och praktisk administration.",
         "details": "Vi hjälper med löner och de uppgifter som behövs för arbetsgivardeklarationer.",
         "bullets": ["Lönehantering", "Underlag till arbetsgivardeklaration", "Kontrolluppgifter", "Personaladministration"]

@@ -84,7 +84,7 @@ export default async function LocaleLayout({
         />
         <StructuredData data={businessJsonLd(locale)} />
         <StructuredData data={websiteJsonLd(locale)} />
-        <Header locale={locale} page="home" nav={nav} contactLabel={dict.cta.book} />
+        <Header locale={locale} page="home" nav={nav} contactLabel={dict.cta.book} portalLabel={dict.home.portalCta} />
         {children}
         <Footer
           locale={locale}

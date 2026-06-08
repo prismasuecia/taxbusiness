@@ -7,7 +7,7 @@ import {TrustBar} from '@/components/TrustBar';
 import {getDictionary} from '@/lib/dictionaries';
 import {isLocale, type Locale} from '@/lib/navigation';
 import {breadcrumbJsonLd} from '@/lib/seo';
-import {ArrowUpRight, CheckCircle2} from 'lucide-react';
+import {ArrowUpRight, Bell, CheckCircle2, FileCheck2, FolderLock, Upload} from 'lucide-react';
 import Image from 'next/image';
 import {notFound} from 'next/navigation';
 
@@ -28,7 +28,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         eyebrow={dict.home.heroEyebrow}
         title={dict.home.heroTitle}
         text={dict.home.heroText}
-        primary={dict.cta.send}
+        primary={dict.cta.book}
         secondary={dict.cta.services}
         niche={dict.home.heroNiche}
         languageLine={dict.home.heroLanguages}
@@ -36,36 +36,28 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
       <div className="px-4 sm:px-6 lg:px-8">
         <TrustBar items={dict.home.trust} />
       </div>
-      {locale === 'sv' ? (
-        <section className="mx-auto max-w-7xl px-4 pt-6 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-4 border-y border-ink/10 bg-white/60 px-5 py-5 sm:flex-row sm:items-center">
-            <Image src={ucGoldLogo} alt="UC Guld" width={70} height={66} className="h-14 w-auto shrink-0 object-contain" />
-            <div>
-              <h2 className="text-sm font-semibold text-petroleum">UC Guld – högsta kreditvärdighet</h2>
-              <p className="mt-1 max-w-3xl text-sm leading-6 text-ink/68">
-                Tax Business Stockholm AB är klassat i UC Riskklass 5, den högsta riskklassen. Det är ett externt kreditbetyg som visar mycket god kreditvärdighet.
-              </p>
-            </div>
+      <section className="mt-6 bg-white py-16 md:py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+          <div>
+            <SectionIntro title={dict.home.bridgeTitle} text={dict.home.bridgeText} />
+            <p className="mt-6 border-l-2 border-copper pl-5 text-lg leading-8 text-petroleum">{dict.home.bridgeClosing}</p>
           </div>
-        </section>
-      ) : null}
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:py-20 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
-        <SectionIntro title={dict.home.bridgeTitle} text={dict.home.bridgeText} />
-        <div className="grid gap-3 sm:grid-cols-2">
-          {dict.home.bridgeItems.map((item) => (
-            <div key={item} className="flex items-center gap-3 border-b border-ink/10 py-4">
-              <CheckCircle2 className="h-4 w-4 shrink-0 text-copper" aria-hidden="true" />
-              <span className="font-serif text-2xl text-petroleum">{item}</span>
-            </div>
-          ))}
+          <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 sm:grid-cols-2">
+            {dict.home.bridgeItems.map((item) => (
+              <div key={item} className="flex items-start gap-3 bg-paper p-5">
+                <CheckCircle2 className="mt-1 h-4 w-4 shrink-0 text-copper" aria-hidden="true" />
+                <span className="font-semibold leading-7 text-petroleum">{item}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
-      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 md:pb-20 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
         <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <SectionIntro title={dict.home.servicesTitle} text={dict.home.servicesText} />
         </div>
-        <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2 lg:grid-cols-3">
-          {dict.services.items.map((item) => (
+        <div className="grid gap-px overflow-hidden rounded-[1.5rem] border border-ink/10 bg-ink/10 md:grid-cols-2">
+          {dict.services.items.slice(0, 4).map((item) => (
             <article key={item.key} className="bg-white p-6">
               <h3 className="font-serif text-2xl leading-tight text-petroleum">{item.title}</h3>
               <p className="mt-3 leading-7 text-ink/68">{item.description}</p>
@@ -82,11 +74,7 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
         </div>
       </section>
       <section className="bg-white py-16 md:py-20">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-          <SectionIntro title={dict.home.languageTitle} text={dict.home.languageText} />
-        </div>
-      </section>
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
         <SectionIntro title={dict.home.processTitle} text={dict.home.processText} />
         <div className="grid gap-4 md:grid-cols-3">
           {dict.home.process.map((step) => (
@@ -96,9 +84,37 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
             </article>
           ))}
         </div>
+        </div>
       </section>
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">
-        <div className="grid gap-8 border-y border-ink/10 py-8 md:grid-cols-[0.35fr_1fr] md:items-center">
+      <section id="client-portal" className="mx-auto max-w-7xl scroll-mt-28 px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+        <div className="grid gap-10 rounded-[1.5rem] border border-petroleum/15 bg-petroleum px-6 py-10 text-white md:grid-cols-[1fr_0.8fr] md:px-10">
+          <div>
+            <FolderLock className="h-8 w-8 text-sand" aria-hidden="true" />
+            <h2 className="mt-6 font-serif text-4xl leading-tight md:text-5xl">{dict.home.portalTitle}</h2>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-white/78">{dict.home.portalText}</p>
+            <span
+              aria-disabled="true"
+              className="mt-7 inline-flex cursor-not-allowed rounded-full bg-white/12 px-6 py-3 text-sm font-semibold text-white/75"
+            >
+              {dict.home.portalCta}
+            </span>
+            <p className="mt-4 max-w-2xl text-sm leading-6 text-white/58">{dict.home.portalNote}</p>
+          </div>
+          <div className="grid content-center gap-3">
+            {[Upload, FileCheck2, Bell].map((Icon, index) => (
+              <div key={index} className="flex items-center gap-4 border-b border-white/15 py-4">
+                <Icon className="h-5 w-5 shrink-0 text-sand" aria-hidden="true" />
+                <span className="text-sm font-semibold text-white/82">
+                  {[dict.home.portalFeatureUpload, dict.home.portalFeatureOverview, dict.home.portalFeatureNotice][index]}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <section className="bg-white py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-[0.38fr_1fr] md:items-center">
           <figure>
             <Image
               src={anaMariaPortrait}
@@ -113,23 +129,37 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
           <div>
             <h2 className="font-serif text-3xl leading-tight text-petroleum md:text-4xl">{dict.home.personTitle}</h2>
             <p className="mt-4 max-w-3xl text-lg leading-8 text-ink/72">{dict.home.personText}</p>
+            <blockquote className="mt-6 max-w-2xl border-l-2 border-copper pl-5 font-serif text-2xl leading-8 text-petroleum">
+              “{dict.home.personQuote}”
+            </blockquote>
           </div>
         </div>
+        </div>
       </section>
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">
-        <div className="grid gap-8 rounded-[1.5rem] border border-ink/10 bg-white p-6 md:grid-cols-[1fr_auto] md:items-center md:p-8">
-          <div>
-            <h2 className="font-serif text-3xl leading-tight text-petroleum md:text-4xl">{dict.home.aboutTitle}</h2>
-            <p className="mt-3 max-w-3xl leading-7 text-ink/68">{dict.home.aboutText}</p>
+      {locale === 'sv' ? (
+        <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          <div className="flex flex-col gap-4 border-y border-ink/10 bg-white/60 px-5 py-5 sm:flex-row sm:items-center">
+            <Image src={ucGoldLogo} alt="UC Guld" width={70} height={66} className="h-14 w-auto shrink-0 object-contain" />
+            <div>
+              <h2 className="text-sm font-semibold text-petroleum">UC Guld – högsta kreditvärdighet</h2>
+              <p className="mt-1 max-w-3xl text-sm leading-6 text-ink/68">
+                Tax Business Stockholm AB är klassat i UC Riskklass 5, den högsta riskklassen. Det är ett externt kreditbetyg som visar mycket god kreditvärdighet.
+              </p>
+            </div>
           </div>
-          <LocaleLink
-            locale={locale}
-            page="about"
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/15 px-5 py-3 text-sm font-semibold text-petroleum hover:bg-linen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-copper"
-          >
-            {dict.nav.about}
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </LocaleLink>
+        </section>
+      ) : null}
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 md:py-20 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr]">
+          <SectionIntro title={dict.faq.title} />
+          <div className="border-t border-ink/10">
+            {dict.faq.items.map((item) => (
+              <details key={item.question} className="group border-b border-ink/10 py-5">
+                <summary className="cursor-pointer list-none font-semibold text-petroleum">{item.question}</summary>
+                <p className="mt-3 max-w-2xl leading-7 text-ink/68">{item.answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 md:pb-20 lg:px-8">

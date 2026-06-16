@@ -45,9 +45,19 @@ security definer
 set search_path = public
 as $$
 begin
-  insert into public.profiles (id, email)
-  values (new.id, new.email)
-  on conflict (id) do update set email = excluded.email;
+  insert into public.profiles (id, email, role)
+  values (
+    new.id,
+    new.email,
+    case when lower(new.email) = 'info@taxbusiness.se' then 'admin' else 'client' end
+  )
+  on conflict (id) do update
+  set
+    email = excluded.email,
+    role = case
+      when lower(excluded.email) = 'info@taxbusiness.se' then 'admin'
+      else public.profiles.role
+    end;
   return new;
 end;
 $$;
@@ -95,5 +105,6 @@ using (
   )
 );
 
--- After Ana Maria has logged in once, make her account admin by replacing the email:
--- update public.profiles set role = 'admin' where email = 'ana@example.com';
+update public.profiles
+set role = 'admin'
+where lower(email) = 'info@taxbusiness.se';

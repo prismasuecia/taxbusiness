@@ -1,0 +1,302 @@
+'use client';
+
+import {FormEvent, useEffect, useMemo, useState} from 'react';
+import type {ReactNode} from 'react';
+import {Download, FileUp, FolderLock, LogOut, RefreshCw} from 'lucide-react';
+import type {Session, SupabaseClient} from '@supabase/supabase-js';
+import {createPortalClient, hasPortalConfig, portalBucket, type PortalDocument} from '@/lib/portal';
+import type {Locale} from '@/lib/navigation';
+
+type PortalLabels = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  loginTitle: string;
+  loginText: string;
+  email: string;
+  sendLink: string;
+  linkSent: string;
+  signOut: string;
+  uploadTitle: string;
+  uploadText: string;
+  chooseFile: string;
+  upload: string;
+  uploading: string;
+  documentsTitle: string;
+  empty: string;
+  refresh: string;
+  adminBadge: string;
+  download: string;
+  notConfiguredTitle: string;
+  notConfiguredText: string;
+  error: string;
+};
+
+export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabels}) {
+  const configured = hasPortalConfig();
+  const supabase = useMemo(() => createPortalClient(), []);
+  const [session, setSession] = useState<Session | null>(null);
+  const [email, setEmail] = useState('');
+  const [notice, setNotice] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [documents, setDocuments] = useState<PortalDocument[]>([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    if (!supabase) return;
+
+    supabase.auth.getSession().then(({data}) => setSession(data.session));
+    const {data} = supabase.auth.onAuthStateChange((_event, nextSession) => setSession(nextSession));
+
+    return () => data.subscription.unsubscribe();
+  }, [supabase]);
+
+  useEffect(() => {
+    if (!supabase || !session) return;
+    void loadDocuments(supabase, session.user.id);
+  }, [supabase, session]);
+
+  async function handleLogin(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!supabase) return;
+
+    setLoading(true);
+    setError(null);
+    setNotice(null);
+
+    const {error: authError} = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: window.location.href
+      }
+    });
+
+    setLoading(false);
+
+    if (authError) {
+      setError(labels.error);
+      return;
+    }
+
+    setNotice(labels.linkSent);
+  }
+
+  async function loadDocuments(client: SupabaseClient, userId: string) {
+    setError(null);
+
+    const {data: profile} = await client.from('profiles').select('role').eq('id', userId).maybeSingle();
+    const admin = profile?.role === 'admin';
+    setIsAdmin(admin);
+
+    const query = client.from('documents').select('*').order('created_at', {ascending: false});
+    const {data, error: listError} = admin ? await query : await query.eq('owner_id', userId);
+
+    if (listError) {
+      setError(labels.error);
+      return;
+    }
+
+    setDocuments((data ?? []) as PortalDocument[]);
+  }
+
+  async function handleUpload(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!supabase || !session) return;
+
+    const input = event.currentTarget.elements.namedItem('file') as HTMLInputElement | null;
+    const file = input?.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError(null);
+    const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
+    const path = `${session.user.id}/${Date.now()}-${safeName}`;
+
+    const {error: storageError} = await supabase.storage.from(portalBucket).upload(path, file, {
+      contentType: file.type || 'application/octet-stream',
+      upsert: false
+    });
+
+    if (storageError) {
+      setUploading(false);
+      setError(labels.error);
+      return;
+    }
+
+    const {error: insertError} = await supabase.from('documents').insert({
+      owner_id: session.user.id,
+      uploader_email: session.user.email,
+      file_name: file.name,
+      file_path: path,
+      file_size: file.size,
+      content_type: file.type || null
+    });
+
+    setUploading(false);
+
+    if (insertError) {
+      setError(labels.error);
+      return;
+    }
+
+    event.currentTarget.reset();
+    await loadDocuments(supabase, session.user.id);
+  }
+
+  async function handleDownload(document: PortalDocument) {
+    if (!supabase) return;
+    const {data, error: signedUrlError} = await supabase.storage.from(portalBucket).createSignedUrl(document.file_path, 60);
+
+    if (signedUrlError || !data?.signedUrl) {
+      setError(labels.error);
+      return;
+    }
+
+    window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  if (!configured || !supabase) {
+    return (
+      <PortalShell labels={labels}>
+        <div className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft md:p-8">
+          <FolderLock className="h-8 w-8 text-copper" aria-hidden="true" />
+          <h2 className="mt-6 font-serif text-3xl text-petroleum">{labels.notConfiguredTitle}</h2>
+          <p className="mt-4 leading-7 text-ink/68">{labels.notConfiguredText}</p>
+        </div>
+      </PortalShell>
+    );
+  }
+
+  if (!session) {
+    return (
+      <PortalShell labels={labels}>
+        <form onSubmit={handleLogin} className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft md:p-8">
+          <h2 className="font-serif text-3xl text-petroleum">{labels.loginTitle}</h2>
+          <p className="mt-3 leading-7 text-ink/68">{labels.loginText}</p>
+          <label className="mt-7 block text-sm font-semibold text-petroleum" htmlFor="portal-email">
+            {labels.email}
+          </label>
+          <input
+            id="portal-email"
+            type="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+            className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
+          />
+          {notice ? <p className="mt-4 rounded-2xl bg-petroleum px-4 py-3 text-sm text-white">{notice}</p> : null}
+          {error ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{error}</p> : null}
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-6 rounded-full bg-petroleum px-7 py-3 text-sm font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:opacity-70"
+          >
+            {loading ? '...' : labels.sendLink}
+          </button>
+        </form>
+      </PortalShell>
+    );
+  }
+
+  return (
+    <PortalShell labels={labels}>
+      <div className="grid gap-6 lg:grid-cols-[0.75fr_1.25fr]">
+        <section className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft md:p-8">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h2 className="font-serif text-3xl text-petroleum">{labels.uploadTitle}</h2>
+              <p className="mt-3 leading-7 text-ink/68">{labels.uploadText}</p>
+            </div>
+            {isAdmin ? <span className="rounded-full bg-linen px-3 py-1 text-xs font-semibold text-petroleum">{labels.adminBadge}</span> : null}
+          </div>
+          <form onSubmit={handleUpload} className="mt-7">
+            <label className="block text-sm font-semibold text-petroleum" htmlFor="portal-file">
+              {labels.chooseFile}
+            </label>
+            <input
+              id="portal-file"
+              name="file"
+              type="file"
+              accept=".pdf,image/*,.doc,.docx,.xls,.xlsx,.csv"
+              required
+              className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-sm text-ink file:mr-4 file:rounded-full file:border-0 file:bg-petroleum file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
+            />
+            {error ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{error}</p> : null}
+            <button
+              type="submit"
+              disabled={uploading}
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-petroleum px-7 py-3 text-sm font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:opacity-70"
+            >
+              <FileUp className="h-4 w-4" aria-hidden="true" />
+              {uploading ? labels.uploading : labels.upload}
+            </button>
+          </form>
+        </section>
+
+        <section className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft md:p-8">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="font-serif text-3xl text-petroleum">{labels.documentsTitle}</h2>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => loadDocuments(supabase, session.user.id)}
+                className="inline-flex items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum"
+              >
+                <RefreshCw className="h-4 w-4" aria-hidden="true" />
+                {labels.refresh}
+              </button>
+              <button
+                type="button"
+                onClick={() => supabase.auth.signOut()}
+                className="inline-flex items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum"
+              >
+                <LogOut className="h-4 w-4" aria-hidden="true" />
+                {labels.signOut}
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 divide-y divide-ink/10">
+            {documents.length === 0 ? <p className="py-6 text-ink/62">{labels.empty}</p> : null}
+            {documents.map((document) => (
+              <article key={document.id} className="flex flex-col gap-4 py-4 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="font-semibold text-petroleum">{document.file_name}</h3>
+                  <p className="mt-1 text-sm text-ink/55">
+                    {new Intl.DateTimeFormat(locale === 'sv' ? 'sv-SE' : locale === 'es' ? 'es-ES' : 'en-GB', {
+                      dateStyle: 'medium',
+                      timeStyle: 'short'
+                    }).format(new Date(document.created_at))}
+                    {isAdmin && document.uploader_email ? ` · ${document.uploader_email}` : ''}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleDownload(document)}
+                  className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum"
+                >
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  {labels.download}
+                </button>
+              </article>
+            ))}
+          </div>
+        </section>
+      </div>
+    </PortalShell>
+  );
+}
+
+function PortalShell({labels, children}: {labels: PortalLabels; children: ReactNode}) {
+  return (
+    <main className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mb-10 max-w-3xl">
+        <p className="text-sm font-semibold uppercase tracking-[0.18em] text-copper">{labels.eyebrow}</p>
+        <h1 className="mt-4 font-serif text-4xl leading-tight text-petroleum md:text-5xl">{labels.title}</h1>
+        <p className="mt-5 text-lg leading-8 text-ink/72">{labels.intro}</p>
+      </div>
+      {children}
+    </main>
+  );
+}

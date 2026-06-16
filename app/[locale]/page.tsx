@@ -92,12 +92,13 @@ export default async function HomePage({params}: {params: Promise<{locale: strin
             <FolderLock className="h-8 w-8 text-sand" aria-hidden="true" />
             <h2 className="mt-6 font-serif text-4xl leading-tight md:text-5xl">{dict.home.portalTitle}</h2>
             <p className="mt-5 max-w-2xl text-lg leading-8 text-white/78">{dict.home.portalText}</p>
-            <span
-              aria-disabled="true"
-              className="mt-7 inline-flex cursor-not-allowed rounded-full bg-white/12 px-6 py-3 text-sm font-semibold text-white/75"
+            <LocaleLink
+              locale={locale}
+              page="portal"
+              className="mt-7 inline-flex rounded-full bg-white px-6 py-3 text-sm font-semibold text-petroleum transition hover:bg-linen focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-copper"
             >
               {dict.home.portalCta}
-            </span>
+            </LocaleLink>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-white/58">{dict.home.portalNote}</p>
           </div>
           <div className="grid content-center gap-3">

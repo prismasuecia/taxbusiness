@@ -4,6 +4,7 @@ import {notFound} from 'next/navigation';
 import {Check} from 'lucide-react';
 import {ContactForm} from '@/components/ContactForm';
 import {CTA} from '@/components/CTA';
+import {PortalApp} from '@/components/PortalApp';
 import {SectionIntro} from '@/components/SectionIntro';
 import {StructuredData} from '@/components/StructuredData';
 import {getDictionary} from '@/lib/dictionaries';
@@ -73,6 +74,7 @@ export default async function LocalizedPage({params}: {params: Promise<{locale: 
   if (page === 'services') return <ServicesPage locale={locale} dict={dict} />;
   if (page === 'startCompany') return <StartCompanyPage locale={locale} dict={dict} />;
   if (page === 'about') return <AboutPage locale={locale} dict={dict} />;
+  if (page === 'portal') return <PortalApp locale={locale} labels={dict.portal} />;
   if (page === 'contact') {
     return (
       <main className="mx-auto grid max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">

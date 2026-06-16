@@ -45,6 +45,11 @@ export const pageSeo: Record<Locale, Record<PageKey, {title: string; description
       title: 'Integritet | Tax Business Stockholm AB',
       description: 'Så hanterar Tax Business Stockholm AB kontaktuppgifter som skickas via webbplatsens formulär.',
       keywords: ['integritet Tax Business Stockholm AB']
+    },
+    portal: {
+      title: 'Kundinlogg | Tax Business Stockholm AB',
+      description: 'Kundportal för uppladdning av bokföringsunderlag, kvitton och dokument till Tax Business Stockholm AB.',
+      keywords: ['kundportal Tax Business Stockholm AB', 'ladda upp kvitton', 'bokföringsunderlag']
     }
   },
   es: {
@@ -79,6 +84,11 @@ export const pageSeo: Record<Locale, Record<PageKey, {title: string; description
       title: 'Privacidad | Tax Business Stockholm AB',
       description: 'Información sobre cómo Tax Business Stockholm AB usa los datos enviados a través del formulario de contacto.',
       keywords: ['privacidad Tax Business Stockholm AB']
+    },
+    portal: {
+      title: 'Acceso clientes | Tax Business Stockholm AB',
+      description: 'Portal de clientes para subir documentos contables, recibos y archivos a Tax Business Stockholm AB.',
+      keywords: ['portal clientes Tax Business Stockholm AB', 'subir recibos', 'documentos contables']
     }
   },
   en: {
@@ -113,6 +123,11 @@ export const pageSeo: Record<Locale, Record<PageKey, {title: string; description
       title: 'Privacy | Tax Business Stockholm AB',
       description: 'How Tax Business Stockholm AB handles contact details submitted through the website form.',
       keywords: ['privacy Tax Business Stockholm AB']
+    },
+    portal: {
+      title: 'Client login | Tax Business Stockholm AB',
+      description: 'Client portal for uploading accounting documents, receipts and files to Tax Business Stockholm AB.',
+      keywords: ['Tax Business Stockholm AB client portal', 'upload receipts', 'accounting documents']
     }
   }
 };

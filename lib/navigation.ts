@@ -3,7 +3,7 @@ export type Locale = (typeof locales)[number];
 
 export const defaultLocale: Locale = 'sv';
 
-export const pageKeys = ['home', 'services', 'startCompany', 'about', 'contact', 'privacy'] as const;
+export const pageKeys = ['home', 'services', 'startCompany', 'about', 'contact', 'privacy', 'portal'] as const;
 export type PageKey = (typeof pageKeys)[number];
 
 export const localizedSlugs: Record<Locale, Record<Exclude<PageKey, 'home'>, string>> = {
@@ -12,21 +12,24 @@ export const localizedSlugs: Record<Locale, Record<Exclude<PageKey, 'home'>, str
     startCompany: 'starta-foretag',
     about: 'om-oss',
     contact: 'kontakt',
-    privacy: 'integritet'
+    privacy: 'integritet',
+    portal: 'kundinlogg'
   },
   es: {
     services: 'servicios',
     startCompany: 'crear-empresa',
     about: 'sobre-nosotros',
     contact: 'contacto',
-    privacy: 'privacidad'
+    privacy: 'privacidad',
+    portal: 'acceso-clientes'
   },
   en: {
     services: 'services',
     startCompany: 'start-business',
     about: 'about',
     contact: 'contact',
-    privacy: 'privacy'
+    privacy: 'privacy',
+    portal: 'client-login'
   }
 };
 

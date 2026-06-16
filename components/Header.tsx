@@ -68,7 +68,7 @@ export function Header({
 
         <div className="hidden items-center gap-3 lg:flex">
           <Link
-            href={`${hrefFor(locale, 'home')}#client-portal`}
+            href={hrefFor(locale, 'portal')}
             className="text-xs font-semibold text-ink/62 transition hover:text-petroleum"
           >
             {portalLabel}
@@ -119,7 +119,7 @@ export function Header({
           </nav>
           <div className="mx-auto max-w-7xl">
             <Link
-              href={`${hrefFor(locale, 'home')}#client-portal`}
+              href={hrefFor(locale, 'portal')}
               onClick={() => setOpen(false)}
               className="mb-4 block rounded-2xl border border-ink/10 px-4 py-3 text-sm font-semibold text-petroleum"
             >

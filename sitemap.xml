@@ -61,6 +61,16 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://taxbusiness.se/sv/kundinlogg/</loc>
+<xhtml:link rel="alternate" hreflang="sv" href="https://taxbusiness.se/sv/kundinlogg/" />
+<xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/acceso-clientes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://taxbusiness.se/en/client-login/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://taxbusiness.se/sv/kundinlogg/" />
+<lastmod>2026-05-28T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://taxbusiness.se/es/</loc>
 <xhtml:link rel="alternate" hreflang="sv" href="https://taxbusiness.se/sv/" />
 <xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/" />
@@ -121,6 +131,16 @@
 <priority>0.8</priority>
 </url>
 <url>
+<loc>https://taxbusiness.se/es/acceso-clientes/</loc>
+<xhtml:link rel="alternate" hreflang="sv" href="https://taxbusiness.se/sv/kundinlogg/" />
+<xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/acceso-clientes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://taxbusiness.se/en/client-login/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://taxbusiness.se/sv/kundinlogg/" />
+<lastmod>2026-05-28T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://taxbusiness.se/en/</loc>
 <xhtml:link rel="alternate" hreflang="sv" href="https://taxbusiness.se/sv/" />
 <xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/" />
@@ -176,6 +196,16 @@
 <xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/privacidad/" />
 <xhtml:link rel="alternate" hreflang="en" href="https://taxbusiness.se/en/privacy/" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://taxbusiness.se/sv/integritet/" />
+<lastmod>2026-05-28T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://taxbusiness.se/en/client-login/</loc>
+<xhtml:link rel="alternate" hreflang="sv" href="https://taxbusiness.se/sv/kundinlogg/" />
+<xhtml:link rel="alternate" hreflang="es" href="https://taxbusiness.se/es/acceso-clientes/" />
+<xhtml:link rel="alternate" hreflang="en" href="https://taxbusiness.se/en/client-login/" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://taxbusiness.se/sv/kundinlogg/" />
 <lastmod>2026-05-28T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>

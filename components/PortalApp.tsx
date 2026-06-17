@@ -39,6 +39,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const [email, setEmail] = useState('');
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [uploadError, setUploadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [documents, setDocuments] = useState<PortalDocument[]>([]);
@@ -94,7 +95,6 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     const {data, error: listError} = admin ? await query : await query.eq('owner_id', userId);
 
     if (listError) {
-      setError(labels.error);
       return;
     }
 
@@ -110,7 +110,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     if (!file) return;
 
     setUploading(true);
-    setError(null);
+    setUploadError(null);
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
     const path = `${session.user.id}/${Date.now()}-${safeName}`;
 
@@ -121,7 +121,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
 
     if (storageError) {
       setUploading(false);
-      setError(labels.error);
+      setUploadError(labels.error);
       return;
     }
 
@@ -137,7 +137,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     setUploading(false);
 
     if (insertError) {
-      setError(labels.error);
+      setUploadError(labels.error);
       return;
     }
 
@@ -150,7 +150,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     const {data, error: signedUrlError} = await supabase.storage.from(portalBucket).createSignedUrl(document.file_path, 60);
 
     if (signedUrlError || !data?.signedUrl) {
-      setError(labels.error);
+      setUploadError(labels.error);
       return;
     }
 
@@ -223,7 +223,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
               required
               className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-sm text-ink file:mr-4 file:rounded-full file:border-0 file:bg-petroleum file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
             />
-            {error ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{error}</p> : null}
+            {uploadError ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{uploadError}</p> : null}
             <button
               type="submit"
               disabled={uploading}

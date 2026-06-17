@@ -2,7 +2,7 @@
 
 import {FormEvent, useEffect, useMemo, useState} from 'react';
 import type {ReactNode} from 'react';
-import {Download, FileUp, FolderLock, LogOut, RefreshCw} from 'lucide-react';
+import {Download, FileUp, FolderLock, LogOut, RefreshCw, Trash2} from 'lucide-react';
 import type {Session, SupabaseClient} from '@supabase/supabase-js';
 import {createPortalClient, hasPortalConfig, portalBucket, type PortalDocument} from '@/lib/portal';
 import type {Locale} from '@/lib/navigation';
@@ -27,6 +27,8 @@ type PortalLabels = {
   refresh: string;
   adminBadge: string;
   download: string;
+  delete: string;
+  deleteConfirm: string;
   notConfiguredTitle: string;
   notConfiguredText: string;
   error: string;
@@ -42,6 +44,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [documents, setDocuments] = useState<PortalDocument[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -155,6 +158,33 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     }
 
     window.open(data.signedUrl, '_blank', 'noopener,noreferrer');
+  }
+
+  async function handleDelete(document: PortalDocument) {
+    if (!supabase || !session) return;
+    if (!window.confirm(labels.deleteConfirm)) return;
+
+    setDeletingId(document.id);
+    setUploadError(null);
+
+    const {error: storageError} = await supabase.storage.from(portalBucket).remove([document.file_path]);
+
+    if (storageError) {
+      setDeletingId(null);
+      setUploadError(labels.error);
+      return;
+    }
+
+    const {error: deleteError} = await supabase.from('documents').delete().eq('id', document.id);
+
+    setDeletingId(null);
+
+    if (deleteError) {
+      setUploadError(labels.error);
+      return;
+    }
+
+    setDocuments((current) => current.filter((item) => item.id !== document.id));
   }
 
   if (!configured || !supabase) {
@@ -271,14 +301,25 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
                     {isAdmin && document.uploader_email ? ` · ${document.uploader_email}` : ''}
                   </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={() => handleDownload(document)}
-                  className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum"
-                >
-                  <Download className="h-4 w-4" aria-hidden="true" />
-                  {labels.download}
-                </button>
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleDownload(document)}
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum"
+                  >
+                    <Download className="h-4 w-4" aria-hidden="true" />
+                    {labels.download}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => handleDelete(document)}
+                    disabled={deletingId === document.id}
+                    className="inline-flex w-fit items-center gap-2 rounded-full border border-ink/10 px-4 py-2 text-sm font-semibold text-petroleum transition hover:border-red-900/30 hover:text-red-900 disabled:cursor-wait disabled:opacity-60"
+                  >
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
+                    {labels.delete}
+                  </button>
+                </div>
               </article>
             ))}
           </div>

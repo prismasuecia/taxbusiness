@@ -26,7 +26,7 @@ alter table public.documents enable row level security;
 
 grant usage on schema public to anon, authenticated;
 grant select on public.profiles to authenticated;
-grant select, insert on public.documents to authenticated;
+grant select, insert, delete on public.documents to authenticated;
 
 create or replace function public.is_admin()
 returns boolean
@@ -89,13 +89,18 @@ create policy "Users can create own documents"
 on public.documents for insert
 with check (owner_id = auth.uid());
 
+drop policy if exists "Users can delete own documents" on public.documents;
+create policy "Users can delete own documents"
+on public.documents for delete
+using (owner_id = auth.uid() or public.is_admin());
+
 insert into storage.buckets (id, name, public)
 values ('client-documents', 'client-documents', false)
 on conflict (id) do nothing;
 
 grant usage on schema storage to authenticated;
 grant select on storage.buckets to authenticated;
-grant select, insert on storage.objects to authenticated;
+grant select, insert, delete on storage.objects to authenticated;
 
 drop policy if exists "Users can upload own files" on storage.objects;
 create policy "Users can upload own files"
@@ -108,6 +113,17 @@ with check (
 drop policy if exists "Users can read own files" on storage.objects;
 create policy "Users can read own files"
 on storage.objects for select
+using (
+  bucket_id = 'client-documents'
+  and (
+    auth.uid()::text = (storage.foldername(name))[1]
+    or public.is_admin()
+  )
+);
+
+drop policy if exists "Users can delete own files" on storage.objects;
+create policy "Users can delete own files"
+on storage.objects for delete
 using (
   bucket_id = 'client-documents'
   and (

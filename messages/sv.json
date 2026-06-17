@@ -209,6 +209,8 @@
     "refresh": "Uppdatera",
     "adminBadge": "Admin",
     "download": "Öppna",
+    "delete": "Radera",
+    "deleteConfirm": "Vill du radera dokumentet?",
     "notConfiguredTitle": "Kundportalen är förberedd",
     "notConfiguredText": "Portalen är byggd i webbplatsen men behöver kopplas till Supabase innan kunder kan logga in och ladda upp dokument.",
     "error": "Något gick fel. Försök igen eller kontakta Tax Business."

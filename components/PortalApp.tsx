@@ -145,6 +145,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     }
 
     event.currentTarget.reset();
+    void notifyUpload(session.user.email ?? '-', file.name, file.size);
     await loadDocuments(supabase, session.user.id);
   }
 
@@ -340,4 +341,34 @@ function PortalShell({labels, children}: {labels: PortalLabels; children: ReactN
       {children}
     </main>
   );
+}
+
+async function notifyUpload(email: string, fileName: string, fileSize: number) {
+  try {
+    await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        _subject: 'Nytt dokument uppladdat i kundportalen',
+        _template: 'table',
+        _captcha: 'false',
+        _honey: '',
+        Kund: email,
+        Dokument: fileName,
+        Storlek: formatFileSize(fileSize),
+        'Skickat från': 'Tax Business kundportal'
+      })
+    });
+  } catch {
+    // Uploads should still succeed even if the email notification is delayed or blocked.
+  }
+}
+
+function formatFileSize(bytes: number) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }

@@ -15,6 +15,15 @@ type PortalLabels = {
   loginText: string;
   loginHelp: string;
   email: string;
+  password: string;
+  login: string;
+  createAccount: string;
+  accountCreated: string;
+  setPasswordTitle: string;
+  setPasswordText: string;
+  newPassword: string;
+  savePassword: string;
+  passwordSaved: string;
   fullName: string;
   companyName: string;
   signedInAs: string;
@@ -44,6 +53,8 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const supabase = useMemo(() => createPortalClient(), []);
   const [session, setSession] = useState<Session | null>(null);
   const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
@@ -78,6 +89,50 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     setError(null);
     setNotice(null);
 
+    const {error: authError} = await supabase.auth.signInWithPassword({email, password});
+
+    setLoading(false);
+
+    if (authError) {
+      setError(labels.error);
+    }
+  }
+
+  async function handleCreateAccount() {
+    if (!supabase) return;
+
+    setLoading(true);
+    setError(null);
+    setNotice(null);
+
+    const {error: authError} = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: window.location.href,
+        data: {
+          locale
+        }
+      }
+    });
+
+    setLoading(false);
+
+    if (authError) {
+      setError(labels.error);
+      return;
+    }
+
+    setNotice(labels.accountCreated);
+  }
+
+  async function handleMagicLink() {
+    if (!supabase) return;
+
+    setLoading(true);
+    setError(null);
+    setNotice(null);
+
     const {error: authError} = await supabase.auth.signInWithOtp({
       email,
       options: {
@@ -96,6 +151,27 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     }
 
     setNotice(labels.linkSent);
+  }
+
+  async function handleSetPassword(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!supabase) return;
+
+    setLoading(true);
+    setError(null);
+    setNotice(null);
+
+    const {error: passwordError} = await supabase.auth.updateUser({password: newPassword});
+
+    setLoading(false);
+
+    if (passwordError) {
+      setError(labels.error);
+      return;
+    }
+
+    setNewPassword('');
+    setNotice(labels.passwordSaved);
   }
 
   async function loadDocuments(client: SupabaseClient, userId: string) {
@@ -251,16 +327,48 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
+            autoComplete="email"
+            className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
+          />
+          <label className="mt-5 block text-sm font-semibold text-petroleum" htmlFor="portal-password">
+            {labels.password}
+          </label>
+          <input
+            id="portal-password"
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+            minLength={8}
+            autoComplete="current-password"
             className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
           />
           {notice ? <p className="mt-4 rounded-2xl bg-petroleum px-4 py-3 text-sm text-white">{notice}</p> : null}
           {error ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{error}</p> : null}
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="submit"
+              disabled={loading}
+              className="rounded-full bg-petroleum px-7 py-3 text-sm font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:opacity-70"
+            >
+              {loading ? '...' : labels.login}
+            </button>
+            <button
+              type="button"
+              disabled={loading || password.length < 8 || !email}
+              onClick={handleCreateAccount}
+              className="rounded-full border border-ink/10 bg-white px-7 py-3 text-sm font-semibold text-petroleum transition hover:border-copper disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {labels.createAccount}
+            </button>
+          </div>
           <button
-            type="submit"
-            disabled={loading}
-            className="mt-6 rounded-full bg-petroleum px-7 py-3 text-sm font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:opacity-70"
+            type="button"
+            disabled={loading || !email}
+            onClick={handleMagicLink}
+            className="mt-4 text-sm font-semibold text-petroleum underline-offset-4 transition hover:underline disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {loading ? '...' : labels.sendLink}
+            {labels.sendLink}
           </button>
         </form>
       </PortalShell>
@@ -282,6 +390,31 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
             {labels.signedInAs} <span className="font-semibold text-petroleum">{profileName || session.user.email}</span>
             {profileCompany ? <span> · {profileCompany}</span> : null}
           </p>
+          <form onSubmit={handleSetPassword} className="mt-5 rounded-2xl border border-ink/10 bg-paper p-4">
+            <h3 className="font-semibold text-petroleum">{labels.setPasswordTitle}</h3>
+            <p className="mt-2 text-sm leading-6 text-ink/62">{labels.setPasswordText}</p>
+            <label className="mt-4 block text-sm font-semibold text-petroleum" htmlFor="portal-new-password">
+              {labels.newPassword}
+            </label>
+            <div className="mt-2 flex flex-col gap-3 sm:flex-row">
+              <input
+                id="portal-new-password"
+                type="password"
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+                minLength={8}
+                autoComplete="new-password"
+                className="w-full rounded-2xl border border-ink/15 bg-white px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
+              />
+              <button
+                type="submit"
+                disabled={loading || newPassword.length < 8}
+                className="shrink-0 rounded-full border border-ink/10 bg-white px-5 py-3 text-sm font-semibold text-petroleum transition hover:border-copper disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {labels.savePassword}
+              </button>
+            </div>
+          </form>
           <form onSubmit={handleUpload} className="mt-7">
             <label className="block text-sm font-semibold text-petroleum" htmlFor="portal-customer-name">
               {labels.fullName}

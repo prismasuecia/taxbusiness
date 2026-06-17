@@ -218,6 +218,7 @@
     "upload": "Ladda upp",
     "uploading": "Laddar upp...",
     "uploadSuccess": "Dokumentet är uppladdat och syns nu i listan.",
+    "uploadNotificationError": "Dokumentet är uppladdat, men mejlnotisen kunde inte skickas.",
     "documentsTitle": "Dina dokument",
     "empty": "Inga dokument har laddats upp ännu.",
     "refresh": "Uppdatera",

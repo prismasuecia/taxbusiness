@@ -22,20 +22,38 @@ create table if not exists public.documents (
   file_path text not null unique,
   file_size bigint,
   content_type text,
+  document_type text,
+  period text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.notification_attempts (
+  id uuid primary key default gen_random_uuid(),
+  document_id uuid references public.documents(id) on delete cascade,
+  user_id uuid references auth.users(id) on delete set null,
+  channel text not null default 'email',
+  status text not null check (status in ('notification_sent', 'notification_failed')),
+  provider text not null default 'resend',
+  provider_message_id text,
+  error_message text,
   created_at timestamptz not null default now()
 );
 
 alter table public.profiles enable row level security;
 alter table public.documents enable row level security;
+alter table public.notification_attempts enable row level security;
 
 alter table public.profiles add column if not exists display_name text;
 alter table public.profiles add column if not exists company_name text;
 alter table public.documents add column if not exists customer_name text;
 alter table public.documents add column if not exists company_name text;
+alter table public.documents add column if not exists document_type text;
+alter table public.documents add column if not exists period text;
 
 grant usage on schema public to anon, authenticated;
 grant select, update on public.profiles to authenticated;
 grant select, insert, delete on public.documents to authenticated;
+grant select on public.notification_attempts to authenticated;
 
 create or replace function public.is_admin()
 returns boolean
@@ -108,6 +126,11 @@ drop policy if exists "Users can delete own documents" on public.documents;
 create policy "Users can delete own documents"
 on public.documents for delete
 using (owner_id = auth.uid() or public.is_admin());
+
+drop policy if exists "Users can read own notification attempts" on public.notification_attempts;
+create policy "Users can read own notification attempts"
+on public.notification_attempts for select
+using (user_id = auth.uid() or public.is_admin());
 
 insert into storage.buckets (id, name, public)
 values ('client-documents', 'client-documents', false)

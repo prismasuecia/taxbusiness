@@ -12,6 +12,8 @@ export type PortalDocument = {
   file_path: string;
   file_size: number | null;
   content_type: string | null;
+  document_type: string | null;
+  period: string | null;
   created_at: string;
 };
 

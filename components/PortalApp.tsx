@@ -36,6 +36,7 @@ type PortalLabels = {
   upload: string;
   uploading: string;
   uploadSuccess: string;
+  uploadNotificationError: string;
   documentsTitle: string;
   empty: string;
   refresh: string;
@@ -243,7 +244,9 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       file_name: file.name,
       file_path: path,
       file_size: file.size,
-      content_type: file.type || null
+      content_type: file.type || null,
+      document_type: null,
+      period: null
     }).select('*').single();
 
     setUploading(false);
@@ -263,6 +266,8 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       file_path: path,
       file_size: file.size,
       content_type: file.type || null,
+      document_type: null,
+      period: null,
       created_at: new Date().toISOString()
     };
 
@@ -271,7 +276,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     setProfileCompany(companyName);
     setDocuments((current) => [visibleDocument, ...current.filter((item) => item.id !== visibleDocument.id)]);
     setUploadSuccess(labels.uploadSuccess);
-    void notifyUpload(customerName, companyName || '-', session.user.email ?? '-', file.name, file.size);
+    void sendUploadNotification(supabase, visibleDocument.id, labels.uploadNotificationError, setUploadError);
     void loadDocuments(supabase, session.user.id);
   }
 
@@ -555,36 +560,19 @@ function PortalShell({labels, children}: {labels: PortalLabels; children: ReactN
   );
 }
 
-async function notifyUpload(customerName: string, companyName: string, email: string, fileName: string, fileSize: number) {
+async function sendUploadNotification(
+  client: SupabaseClient,
+  documentId: string,
+  failureMessage: string,
+  setUploadError: (message: string) => void
+) {
   try {
-    await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: 'Nytt dokument uppladdat i kundportalen',
-        _template: 'table',
-        _captcha: 'false',
-        _honey: '',
-        _replyto: email,
-        Kund: customerName,
-        Företagsnamn: companyName,
-        'E-post': email,
-        Dokument: fileName,
-        Storlek: formatFileSize(fileSize),
-        Meddelande: 'Ett nytt dokument har laddats upp i kundportalen.',
-        'Skickat från': 'Tax Business kundportal'
-      })
+    const {error} = await client.functions.invoke('send-upload-notification', {
+      body: {document_id: documentId}
     });
-  } catch {
-    // The upload is already saved. If FormSubmit blocks the email, the document remains visible in the portal.
-  }
-}
 
-function formatFileSize(bytes: number) {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+    if (error) setUploadError(failureMessage);
+  } catch {
+    setUploadError(failureMessage);
+  }
 }

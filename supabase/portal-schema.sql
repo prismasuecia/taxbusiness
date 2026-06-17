@@ -6,6 +6,7 @@ create extension if not exists pgcrypto;
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text,
+  display_name text,
   role text not null default 'client' check (role in ('client', 'admin')),
   created_at timestamptz not null default now()
 );
@@ -14,6 +15,7 @@ create table if not exists public.documents (
   id uuid primary key default gen_random_uuid(),
   owner_id uuid not null references auth.users(id) on delete cascade,
   uploader_email text,
+  customer_name text,
   file_name text not null,
   file_path text not null unique,
   file_size bigint,
@@ -24,8 +26,11 @@ create table if not exists public.documents (
 alter table public.profiles enable row level security;
 alter table public.documents enable row level security;
 
+alter table public.profiles add column if not exists display_name text;
+alter table public.documents add column if not exists customer_name text;
+
 grant usage on schema public to anon, authenticated;
-grant select on public.profiles to authenticated;
+grant select, update on public.profiles to authenticated;
 grant select, insert, delete on public.documents to authenticated;
 
 create or replace function public.is_admin()
@@ -78,6 +83,12 @@ drop policy if exists "Users can read own profile" on public.profiles;
 create policy "Users can read own profile"
 on public.profiles for select
 using (id = auth.uid() or public.is_admin());
+
+drop policy if exists "Users can update own profile" on public.profiles;
+create policy "Users can update own profile"
+on public.profiles for update
+using (id = auth.uid() or public.is_admin())
+with check (id = auth.uid() or public.is_admin());
 
 drop policy if exists "Users can read own documents" on public.documents;
 create policy "Users can read own documents"

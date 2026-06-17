@@ -14,6 +14,8 @@ type PortalLabels = {
   loginTitle: string;
   loginText: string;
   email: string;
+  fullName: string;
+  signedInAs: string;
   sendLink: string;
   linkSent: string;
   signOut: string;
@@ -47,6 +49,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const [deletingId, setDeletingId] = useState<string | null>(null);
   const [documents, setDocuments] = useState<PortalDocument[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [profileName, setProfileName] = useState('');
 
   useEffect(() => {
     if (!supabase) return;
@@ -90,9 +93,10 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   async function loadDocuments(client: SupabaseClient, userId: string) {
     setError(null);
 
-    const {data: profile} = await client.from('profiles').select('role').eq('id', userId).maybeSingle();
+    const {data: profile} = await client.from('profiles').select('role, display_name').eq('id', userId).maybeSingle();
     const admin = profile?.role === 'admin';
     setIsAdmin(admin);
+    setProfileName(typeof profile?.display_name === 'string' ? profile.display_name : '');
 
     const query = client.from('documents').select('*').order('created_at', {ascending: false});
     const {data, error: listError} = admin ? await query : await query.eq('owner_id', userId);
@@ -109,8 +113,13 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     if (!supabase || !session) return;
 
     const input = event.currentTarget.elements.namedItem('file') as HTMLInputElement | null;
+    const nameInput = event.currentTarget.elements.namedItem('customerName') as HTMLInputElement | null;
     const file = input?.files?.[0];
-    if (!file) return;
+    const customerName = String(nameInput?.value || '').trim();
+    if (!file || customerName.length < 2) {
+      setUploadError(labels.error);
+      return;
+    }
 
     setUploading(true);
     setUploadError(null);
@@ -128,9 +137,18 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       return;
     }
 
+    const {error: profileError} = await supabase.from('profiles').update({display_name: customerName}).eq('id', session.user.id);
+
+    if (profileError) {
+      setUploading(false);
+      setUploadError(labels.error);
+      return;
+    }
+
     const {error: insertError} = await supabase.from('documents').insert({
       owner_id: session.user.id,
       uploader_email: session.user.email,
+      customer_name: customerName,
       file_name: file.name,
       file_path: path,
       file_size: file.size,
@@ -145,7 +163,8 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     }
 
     event.currentTarget.reset();
-    void notifyUpload(session.user.email ?? '-', file.name, file.size);
+    setProfileName(customerName);
+    void notifyUpload(customerName, session.user.email ?? '-', file.name, file.size);
     await loadDocuments(supabase, session.user.id);
   }
 
@@ -242,8 +261,22 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
             </div>
             {isAdmin ? <span className="rounded-full bg-linen px-3 py-1 text-xs font-semibold text-petroleum">{labels.adminBadge}</span> : null}
           </div>
+          <p className="mt-5 rounded-2xl bg-paper px-4 py-3 text-sm text-ink/68">
+            {labels.signedInAs} <span className="font-semibold text-petroleum">{profileName || session.user.email}</span>
+          </p>
           <form onSubmit={handleUpload} className="mt-7">
-            <label className="block text-sm font-semibold text-petroleum" htmlFor="portal-file">
+            <label className="block text-sm font-semibold text-petroleum" htmlFor="portal-customer-name">
+              {labels.fullName}
+            </label>
+            <input
+              id="portal-customer-name"
+              name="customerName"
+              type="text"
+              defaultValue={profileName}
+              required
+              className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
+            />
+            <label className="mt-5 block text-sm font-semibold text-petroleum" htmlFor="portal-file">
               {labels.chooseFile}
             </label>
             <input
@@ -299,7 +332,9 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
                       dateStyle: 'medium',
                       timeStyle: 'short'
                     }).format(new Date(document.created_at))}
-                    {isAdmin && document.uploader_email ? ` · ${document.uploader_email}` : ''}
+                    {isAdmin && document.uploader_email
+                      ? ` · ${document.customer_name ? `${document.customer_name} · ` : ''}${document.uploader_email}`
+                      : ''}
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2">
@@ -343,7 +378,7 @@ function PortalShell({labels, children}: {labels: PortalLabels; children: ReactN
   );
 }
 
-async function notifyUpload(email: string, fileName: string, fileSize: number) {
+async function notifyUpload(customerName: string, email: string, fileName: string, fileSize: number) {
   try {
     await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
       method: 'POST',
@@ -356,7 +391,8 @@ async function notifyUpload(email: string, fileName: string, fileSize: number) {
         _template: 'table',
         _captcha: 'false',
         _honey: '',
-        Kund: email,
+        Kund: customerName,
+        'E-post': email,
         Dokument: fileName,
         Storlek: formatFileSize(fileSize),
         'Skickat från': 'Tax Business kundportal'

@@ -6,6 +6,7 @@ export type PortalDocument = {
   id: string;
   owner_id: string;
   uploader_email: string | null;
+  customer_name: string | null;
   file_name: string;
   file_path: string;
   file_size: number | null;

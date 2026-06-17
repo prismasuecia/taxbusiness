@@ -13,6 +13,7 @@ type PortalLabels = {
   intro: string;
   loginTitle: string;
   loginText: string;
+  loginHelp: string;
   email: string;
   fullName: string;
   companyName: string;
@@ -25,6 +26,7 @@ type PortalLabels = {
   chooseFile: string;
   upload: string;
   uploading: string;
+  uploadSuccess: string;
   documentsTitle: string;
   empty: string;
   refresh: string;
@@ -45,6 +47,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
+  const [uploadSuccess, setUploadSuccess] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
@@ -78,7 +81,10 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     const {error: authError} = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.href
+        emailRedirectTo: window.location.href,
+        data: {
+          locale
+        }
       }
     });
 
@@ -123,11 +129,13 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     const companyName = String(companyInput?.value || '').trim();
     if (!file || customerName.length < 2) {
       setUploadError(labels.error);
+      setUploadSuccess(null);
       return;
     }
 
     setUploading(true);
     setUploadError(null);
+    setUploadSuccess(null);
     const safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '-');
     const path = `${session.user.id}/${Date.now()}-${safeName}`;
 
@@ -150,7 +158,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       return;
     }
 
-    const {error: insertError} = await supabase.from('documents').insert({
+    const {data: insertedDocument, error: insertError} = await supabase.from('documents').insert({
       owner_id: session.user.id,
       uploader_email: session.user.email,
       customer_name: customerName,
@@ -159,7 +167,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       file_path: path,
       file_size: file.size,
       content_type: file.type || null
-    });
+    }).select('*').single();
 
     setUploading(false);
 
@@ -171,8 +179,9 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     event.currentTarget.reset();
     setProfileName(customerName);
     setProfileCompany(companyName);
-    void notifyUpload(customerName, companyName || '-', session.user.email ?? '-', file.name, file.size);
-    await loadDocuments(supabase, session.user.id);
+    setDocuments((current) => insertedDocument ? [insertedDocument as PortalDocument, ...current.filter((item) => item.id !== insertedDocument.id)] : current);
+    setUploadSuccess(labels.uploadSuccess);
+    await notifyUpload(customerName, companyName || '-', session.user.email ?? '-', file.name, file.size);
   }
 
   async function handleDownload(document: PortalDocument) {
@@ -232,6 +241,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
         <form onSubmit={handleLogin} className="rounded-[2rem] border border-ink/10 bg-white p-6 shadow-soft md:p-8">
           <h2 className="font-serif text-3xl text-petroleum">{labels.loginTitle}</h2>
           <p className="mt-3 leading-7 text-ink/68">{labels.loginText}</p>
+          <p className="mt-3 text-sm leading-6 text-ink/55">{labels.loginHelp}</p>
           <label className="mt-7 block text-sm font-semibold text-petroleum" htmlFor="portal-email">
             {labels.email}
           </label>
@@ -306,6 +316,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
               className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-sm text-ink file:mr-4 file:rounded-full file:border-0 file:bg-petroleum file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
             />
             {uploadError ? <p className="mt-4 rounded-2xl bg-linen px-4 py-3 text-sm text-ink">{uploadError}</p> : null}
+            {uploadSuccess ? <p className="mt-4 rounded-2xl bg-petroleum px-4 py-3 text-sm text-white">{uploadSuccess}</p> : null}
             <button
               type="submit"
               disabled={uploading}
@@ -409,11 +420,13 @@ async function notifyUpload(customerName: string, companyName: string, email: st
         _template: 'table',
         _captcha: 'false',
         _honey: '',
+        _replyto: email,
         Kund: customerName,
         Företagsnamn: companyName,
         'E-post': email,
         Dokument: fileName,
         Storlek: formatFileSize(fileSize),
+        Meddelande: 'Ett nytt dokument har laddats upp i kundportalen.',
         'Skickat från': 'Tax Business kundportal'
       })
     });

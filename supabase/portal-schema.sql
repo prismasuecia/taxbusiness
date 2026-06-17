@@ -7,6 +7,7 @@ create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
   email text,
   display_name text,
+  company_name text,
   role text not null default 'client' check (role in ('client', 'admin')),
   created_at timestamptz not null default now()
 );
@@ -16,6 +17,7 @@ create table if not exists public.documents (
   owner_id uuid not null references auth.users(id) on delete cascade,
   uploader_email text,
   customer_name text,
+  company_name text,
   file_name text not null,
   file_path text not null unique,
   file_size bigint,
@@ -27,7 +29,9 @@ alter table public.profiles enable row level security;
 alter table public.documents enable row level security;
 
 alter table public.profiles add column if not exists display_name text;
+alter table public.profiles add column if not exists company_name text;
 alter table public.documents add column if not exists customer_name text;
+alter table public.documents add column if not exists company_name text;
 
 grant usage on schema public to anon, authenticated;
 grant select, update on public.profiles to authenticated;

@@ -197,6 +197,7 @@
     "loginText": "Ange den e-postadress du använder i kontakten med Tax Business. Du får en säker inloggningslänk via mejl.",
     "email": "E-post",
     "fullName": "Ditt namn",
+    "companyName": "Företagsnamn",
     "signedInAs": "Inloggad som",
     "sendLink": "Skicka inloggningslänk",
     "linkSent": "Vi har skickat en inloggningslänk till din e-post.",

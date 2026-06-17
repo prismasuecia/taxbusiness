@@ -15,6 +15,7 @@ type PortalLabels = {
   loginText: string;
   email: string;
   fullName: string;
+  companyName: string;
   signedInAs: string;
   sendLink: string;
   linkSent: string;
@@ -50,6 +51,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   const [documents, setDocuments] = useState<PortalDocument[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [profileName, setProfileName] = useState('');
+  const [profileCompany, setProfileCompany] = useState('');
 
   useEffect(() => {
     if (!supabase) return;
@@ -93,10 +95,11 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
   async function loadDocuments(client: SupabaseClient, userId: string) {
     setError(null);
 
-    const {data: profile} = await client.from('profiles').select('role, display_name').eq('id', userId).maybeSingle();
+    const {data: profile} = await client.from('profiles').select('role, display_name, company_name').eq('id', userId).maybeSingle();
     const admin = profile?.role === 'admin';
     setIsAdmin(admin);
     setProfileName(typeof profile?.display_name === 'string' ? profile.display_name : '');
+    setProfileCompany(typeof profile?.company_name === 'string' ? profile.company_name : '');
 
     const query = client.from('documents').select('*').order('created_at', {ascending: false});
     const {data, error: listError} = admin ? await query : await query.eq('owner_id', userId);
@@ -114,8 +117,10 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
 
     const input = event.currentTarget.elements.namedItem('file') as HTMLInputElement | null;
     const nameInput = event.currentTarget.elements.namedItem('customerName') as HTMLInputElement | null;
+    const companyInput = event.currentTarget.elements.namedItem('companyName') as HTMLInputElement | null;
     const file = input?.files?.[0];
     const customerName = String(nameInput?.value || '').trim();
+    const companyName = String(companyInput?.value || '').trim();
     if (!file || customerName.length < 2) {
       setUploadError(labels.error);
       return;
@@ -137,7 +142,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       return;
     }
 
-    const {error: profileError} = await supabase.from('profiles').update({display_name: customerName}).eq('id', session.user.id);
+    const {error: profileError} = await supabase.from('profiles').update({display_name: customerName, company_name: companyName || null}).eq('id', session.user.id);
 
     if (profileError) {
       setUploading(false);
@@ -149,6 +154,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       owner_id: session.user.id,
       uploader_email: session.user.email,
       customer_name: customerName,
+      company_name: companyName || null,
       file_name: file.name,
       file_path: path,
       file_size: file.size,
@@ -164,7 +170,8 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
 
     event.currentTarget.reset();
     setProfileName(customerName);
-    void notifyUpload(customerName, session.user.email ?? '-', file.name, file.size);
+    setProfileCompany(companyName);
+    void notifyUpload(customerName, companyName || '-', session.user.email ?? '-', file.name, file.size);
     await loadDocuments(supabase, session.user.id);
   }
 
@@ -263,6 +270,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
           </div>
           <p className="mt-5 rounded-2xl bg-paper px-4 py-3 text-sm text-ink/68">
             {labels.signedInAs} <span className="font-semibold text-petroleum">{profileName || session.user.email}</span>
+            {profileCompany ? <span> · {profileCompany}</span> : null}
           </p>
           <form onSubmit={handleUpload} className="mt-7">
             <label className="block text-sm font-semibold text-petroleum" htmlFor="portal-customer-name">
@@ -274,6 +282,16 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
               type="text"
               defaultValue={profileName}
               required
+              className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
+            />
+            <label className="mt-5 block text-sm font-semibold text-petroleum" htmlFor="portal-company-name">
+              {labels.companyName}
+            </label>
+            <input
+              id="portal-company-name"
+              name="companyName"
+              type="text"
+              defaultValue={profileCompany}
               className="mt-2 w-full rounded-2xl border border-ink/15 bg-paper px-4 py-3 text-ink outline-none transition focus:border-copper focus:ring-2 focus:ring-copper/25"
             />
             <label className="mt-5 block text-sm font-semibold text-petroleum" htmlFor="portal-file">
@@ -333,7 +351,7 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
                       timeStyle: 'short'
                     }).format(new Date(document.created_at))}
                     {isAdmin && document.uploader_email
-                      ? ` · ${document.customer_name ? `${document.customer_name} · ` : ''}${document.uploader_email}`
+                      ? ` · ${document.company_name ? `${document.company_name} · ` : ''}${document.customer_name ? `${document.customer_name} · ` : ''}${document.uploader_email}`
                       : ''}
                   </p>
                 </div>
@@ -378,7 +396,7 @@ function PortalShell({labels, children}: {labels: PortalLabels; children: ReactN
   );
 }
 
-async function notifyUpload(customerName: string, email: string, fileName: string, fileSize: number) {
+async function notifyUpload(customerName: string, companyName: string, email: string, fileName: string, fileSize: number) {
   try {
     await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
       method: 'POST',
@@ -392,6 +410,7 @@ async function notifyUpload(customerName: string, email: string, fileName: strin
         _captcha: 'false',
         _honey: '',
         Kund: customerName,
+        Företagsnamn: companyName,
         'E-post': email,
         Dokument: fileName,
         Storlek: formatFileSize(fileSize),

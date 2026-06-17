@@ -197,9 +197,10 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
     event.preventDefault();
     if (!supabase || !session) return;
 
-    const input = event.currentTarget.elements.namedItem('file') as HTMLInputElement | null;
-    const nameInput = event.currentTarget.elements.namedItem('customerName') as HTMLInputElement | null;
-    const companyInput = event.currentTarget.elements.namedItem('companyName') as HTMLInputElement | null;
+    const form = event.currentTarget;
+    const input = form.elements.namedItem('file') as HTMLInputElement | null;
+    const nameInput = form.elements.namedItem('customerName') as HTMLInputElement | null;
+    const companyInput = form.elements.namedItem('companyName') as HTMLInputElement | null;
     const file = input?.files?.[0];
     const customerName = String(nameInput?.value || '').trim();
     const companyName = String(companyInput?.value || '').trim();
@@ -252,12 +253,25 @@ export function PortalApp({locale, labels}: {locale: Locale; labels: PortalLabel
       return;
     }
 
-    event.currentTarget.reset();
+    const visibleDocument = insertedDocument ? insertedDocument as PortalDocument : {
+      id: path,
+      owner_id: session.user.id,
+      uploader_email: session.user.email ?? null,
+      customer_name: customerName,
+      company_name: companyName || null,
+      file_name: file.name,
+      file_path: path,
+      file_size: file.size,
+      content_type: file.type || null,
+      created_at: new Date().toISOString()
+    };
+
+    form.reset();
     setProfileName(customerName);
     setProfileCompany(companyName);
-    setDocuments((current) => insertedDocument ? [insertedDocument as PortalDocument, ...current.filter((item) => item.id !== insertedDocument.id)] : current);
+    setDocuments((current) => [visibleDocument, ...current.filter((item) => item.id !== visibleDocument.id)]);
     setUploadSuccess(labels.uploadSuccess);
-    await notifyUpload(customerName, companyName || '-', session.user.email ?? '-', file.name, file.size);
+    void loadDocuments(supabase, session.user.id);
   }
 
   async function handleDownload(document: PortalDocument) {
@@ -538,38 +552,4 @@ function PortalShell({labels, children}: {labels: PortalLabels; children: ReactN
       {children}
     </main>
   );
-}
-
-async function notifyUpload(customerName: string, companyName: string, email: string, fileName: string, fileSize: number) {
-  try {
-    await fetch('https://formsubmit.co/ajax/info@taxbusiness.se', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        _subject: 'Nytt dokument uppladdat i kundportalen',
-        _template: 'table',
-        _captcha: 'false',
-        _honey: '',
-        _replyto: email,
-        Kund: customerName,
-        Företagsnamn: companyName,
-        'E-post': email,
-        Dokument: fileName,
-        Storlek: formatFileSize(fileSize),
-        Meddelande: 'Ett nytt dokument har laddats upp i kundportalen.',
-        'Skickat från': 'Tax Business kundportal'
-      })
-    });
-  } catch {
-    // Uploads should still succeed even if the email notification is delayed or blocked.
-  }
-}
-
-function formatFileSize(bytes: number) {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
 }

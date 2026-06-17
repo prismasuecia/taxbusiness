@@ -93,6 +93,10 @@ insert into storage.buckets (id, name, public)
 values ('client-documents', 'client-documents', false)
 on conflict (id) do nothing;
 
+grant usage on schema storage to authenticated;
+grant select on storage.buckets to authenticated;
+grant select, insert on storage.objects to authenticated;
+
 drop policy if exists "Users can upload own files" on storage.objects;
 create policy "Users can upload own files"
 on storage.objects for insert
